@@ -14,15 +14,19 @@ header { background: #000; color: white; padding: 1rem; position: sticky; top: 0
 .hero { background: #111; color: white; text-align: center; padding: 5rem 1rem; transition: background 0.3s ease; }
 .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
 .hero p { font-size: 1.1rem; color: #ddd; margin-bottom: 1.5rem; }
+.hero .btn { margin-top: 1rem; }
+
 .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; max-width: 1200px; margin: -30px auto 2rem; padding: 0 1rem; }
 .badge { background: white; padding: 1rem 1.5rem; border-radius: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s ease; }
 .badge:hover { transform: translateY(-5px); }
 .badge-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
 .badge-title { font-weight: 600; color: #1a1a1a; margin-bottom: 0.3rem; }
 .badge-sub { font-size: 0.85rem; color: #666; }
+
 .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
 .section { background: white; border-radius: 10px; padding: 2rem 1rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
 .section h2 { color: #1a1a1a; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 3px solid #ffa500; }
+
 .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
 .product { border: 1px solid #ddd; border-radius: 10px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; background: #fff; }
 .product:hover { transform: translateY(-7px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
@@ -31,22 +35,28 @@ header { background: #000; color: white; padding: 1rem; position: sticky; top: 0
 .product:hover .product-img img { transform: scale(1.05); }
 .product-content { padding: 1.5rem; }
 .product-tag { background: linear-gradient(135deg, #ffa500, #ffb84d); padding: 0.4rem 1rem; border-radius: 25px; font-weight: 600; display: inline-block; margin-bottom: 1rem; }
+
 .specs { list-style: none; margin: 1rem 0; }
 .specs li { padding: 0.5rem 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
 .specs li:last-child { border-bottom: none; }
 .spec-label { font-weight: 600; color: #555; }
+
 .info-box { background: #f9f9f9; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #ffa500; margin-bottom: 1rem; transition: transform 0.3s ease; }
 .info-box:hover { transform: translateY(-3px); }
 .info-box h3 { color: #1a1a1a; margin-bottom: 0.5rem; }
 .info-box ul { list-style: none; padding-left: 0; }
 .info-box ul li { padding: 0.3rem 0; }
+
 .btn { background: #ffa500; color: white; padding: 1rem 2rem; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer; margin: 0.5rem; text-decoration: none; display: inline-block; transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .btn:hover { background: #ff8c00; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
 footer { background: #1a1a1a; color: white; text-align: center; padding: 2rem; font-size: 0.95rem; }
+
 @media (max-width: 768px) { .hero h1 { font-size: 1.8rem; } .products { grid-template-columns: 1fr; } .product-img { height: 200px; } }
 </style>
 </head>
 <body>
+
 <header>
 <div class="header-content">
 <div class="logo">Mini Pelles Direct</div>
@@ -61,24 +71,14 @@ footer { background: #1a1a1a; color: white; text-align: center; padding: 2rem; f
 </section>
 
 <div class="badges">
-<div class="badge">
-<div class="badge-icon">🚚</div>
-<div class="badge-title">Livraison rapide</div>
-<div class="badge-sub">Secteur Bain-de-Bretagne</div>
-</div>
-<div class="badge">
-<div class="badge-icon">🛡️</div>
-<div class="badge-title">Garantie 1 an</div>
-<div class="badge-sub">Sur toutes nos machines</div>
-</div>
-<div class="badge">
-<div class="badge-icon">⭐</div>
-<div class="badge-title">4,9/5 étoiles</div>
-<div class="badge-sub">37 avis clients</div>
-</div>
+<div class="badge"><div class="badge-icon">🚚</div><div class="badge-title">Livraison rapide</div><div class="badge-sub">Secteur Bain-de-Bretagne</div></div>
+<div class="badge"><div class="badge-icon">🛡️</div><div class="badge-title">Garantie 1 an</div><div class="badge-sub">Sur toutes nos machines</div></div>
+<div class="badge"><div class="badge-icon">⭐</div><div class="badge-title">4,9/5 étoiles</div><div class="badge-sub">37 avis clients</div></div>
 </div>
 
 <div class="container">
+
+<!-- Catalogue / Produits -->
 <section class="section">
 <h2>📦 Notre Catalogue</h2>
 <div class="products">
@@ -119,6 +119,78 @@ footer { background: #1a1a1a; color: white; text-align: center; padding: 2rem; f
 </div>
 </div>
 </section>
+
+<!-- Accessoires -->
+<section class="section">
+<h2>🔧 Accessoires Compatibles</h2>
+<div class="info-box"><h3>🌀 Tarière</h3><p>Idéale pour percer des trous de fondation, plantation d'arbres et installation de poteaux</p><p style="margin-top:0.5rem;color:#ffa500;font-weight:bold;">Compatible 1T & 1,5T</p></div>
+<div class="info-box"><h3>🔨 BRH (Brise Roche Hydraulique)</h3><p>Équipement de démolition pour briser béton, roches et surfaces dures</p><p style="margin-top:0.5rem;color:#ffa500;font-weight:bold;">Compatible 1T & 1,5T</p></div>
+<div class="info-box"><h3>⛓️ Chenilles de Remplacement</h3><p>Chenilles haute qualité pour assurer une adhérence optimale sur tous terrains</p><p style="margin-top:0.5rem;color:#ffa500;font-weight:bold;">Pour 1T & 1,5T</p></div>
+<div class="info-box"><h3>⛏️ Godets</h3><p>Plusieurs tailles disponibles selon vos besoins : <strong>400mm</strong> (Tranchée), <strong>600mm</strong> (Standard), <strong>800mm</strong> (Curage)</p><p style="margin-top:0.5rem;color:#ffa500;font-weight:bold;">Compatible 1T & 1,5T</p></div>
+</section>
+
+<!-- À Propos -->
+<section class="section">
+<h2>🏢 À Propos</h2>
+<div class="info-box"><h3>Mini Pelles Direct</h3>
+<p>Entreprise basée à <strong>Bain-de-Bretagne (35)</strong>, spécialisée dans la location et la vente de mini pelles. Nous proposons des machines compactes et performantes pour particuliers, artisans et professionnels du BTP.</p></div>
+<div class="info-box"><h3>Nos Services</h3>
+<ul>
+<li>✓ <strong>Location</strong> courte et longue durée</li>
+<li>✓ <strong>Vente</strong> de matériel neuf avec garantie 1 an</li>
+<li>✓ <strong>Accessoires</strong> compatibles</li>
+<li>✓ <strong>Conseils</strong> personnalisés</li>
+</ul></div>
+</section>
+
+<!-- Garantie -->
+<section class="section">
+<h2>🛡️ Garantie</h2>
+<div class="info-box">
+<p>Toutes nos mini pelles sont couvertes par une <strong>garantie constructeur de 12 mois</strong> à compter de la date de livraison. Les conditions détaillées vous seront communiquées lors de votre achat.</p>
+</div>
+</section>
+
+<!-- Livraison -->
+<section class="section">
+<h2>🚚 Livraison</h2>
+<div class="info-box">
+<p>Nous proposons un service de livraison dans le secteur proche de Bain-de-Bretagne. Le coût est défini directement avec le client selon la distance et l'accessibilité.</p>
+</div>
+</section>
+
+<!-- Avis Clients -->
+<section class="section">
+<h2>⭐ Avis Clients - 4,9/5</h2>
+<div class="info-box"><p><strong>Thomas D.</strong> ⭐⭐⭐⭐⭐</p><p style="font-style: italic;">"Excellente expérience ! Machine en parfait état, conseils au top. Je recommande vivement."</p></div>
+<div class="info-box"><p><strong>Marie L.</strong> ⭐⭐⭐⭐⭐</p><p style="font-style: italic;">"Super service!! Livraison rapide et équipe très réactive. Prix honnête et matériel de qualité."</p></div>
+<div class="info-box"><p><strong>Jean-Pierre M.</strong> ⭐⭐⭐⭐⭐</p><p style="font-style: italic;">"Artisan paysagiste, j'ai trouvé la machine parfaite. Alex a pris le temps de bien me conseiller."</p></div>
+</section>
+
+<!-- Questions Fréquentes -->
+<section class="section">
+<h2>❓ Questions Fréquentes</h2>
+<div class="info-box"><h3>Quelle mini pelle choisir entre la 1T et la 1,5T ?</h3><p>La 1T est idéale pour travaux légers et accès restreints (930mm). La 1,5T offre plus de puissance pour terrassements importants.</p></div>
+<div class="info-box"><h3>Proposez-vous de la location ou de la vente ?</h3><p>Oui, nous proposons à la fois la location (courte et longue durée) et la vente de mini pelles neuves.</p></div>
+<div class="info-box"><h3>Les accessoires sont-ils compatibles ?</h3><p>Oui, tous nos accessoires sont compatibles avec les deux modèles grâce à l'attache rapide standard.</p></div>
+</section>
+
+<!-- Contact -->
+<section class="section" id="contact">
+<h2>📧 Contact</h2>
+<div class="info-box">
+<h3>Contactez-nous</h3>
+<p><strong>📞 Téléphone :</strong> <a href="tel:0699168777" style="color: #ffa500;">06 99 16 87 77</a></p>
+<p><strong>📧 Email :</strong> <a href="mailto:glamwear@hotmail.fr" style="color: #ffa500;">glamwear@hotmail.fr</a></p>
+<p><strong>📍 Adresse :</strong> Bain-de-Bretagne, Ille-et-Vilaine (35)</p>
+<p style="margin-top:1rem;"><em>Du lundi au vendredi, 8h-18h</em></p>
+</div>
+<div style="text-align:center; margin-top:2rem;">
+<a href="tel:0699168777" class="btn">📞 Appelez-nous</a>
+<a href="mailto:glamwear@hotmail.fr" class="btn">📧 Email</a>
+</div>
+</section>
+
 </div>
 
 <footer>
