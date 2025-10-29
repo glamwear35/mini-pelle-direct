@@ -4,15 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mini Pelles Direct - Location et Vente en Bretagne</title>
-
-<!-- Favicon -->
-<link rel="icon" href="https://i.postimg.cc/Gh6QbQwF/logo-mini-pelle-direct.png" type="image/png">
-
-<!-- SEO -->
-<meta name="description" content="Location et vente de mini pelles en Bretagne. Découvrez notre catalogue complet, accessoires et services professionnels.">
-<meta name="keywords" content="mini pelle, location, vente, Bretagne, BTP, accessoires, Mini Pelles Direct">
-<meta name="author" content="Mini Pelles Direct">
-
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; }
@@ -22,7 +13,7 @@ header { background: #000; color: white; padding: 1rem; position: sticky; top: 0
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* texte à gauche, logo à droite */
     align-items: center;
 }
 .logo { font-size: 1.5rem; font-weight: bold; color: #ffd700; }
@@ -42,8 +33,7 @@ header { background: #000; color: white; padding: 1rem; position: sticky; top: 0
 .section h2 { color: #1a1a1a; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 3px solid #ffa500; }
 
 .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
-.product { border: 1px solid #ddd; border-radius: 10px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.product:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+.product { border: 1px solid #ddd; border-radius: 10px; overflow: hidden; }
 .product-img { width: 100%; height: 250px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; }
 .product-img img { width: 100%; height: 100%; object-fit: contain; }
 .product-content { padding: 1.5rem; }
@@ -59,77 +49,208 @@ header { background: #000; color: white; padding: 1rem; position: sticky; top: 0
 .info-box ul { list-style: none; padding-left: 0; }
 .info-box ul li { padding: 0.3rem 0; }
 
-.btn { background: #ffa500; color: white; padding: 1rem 2rem; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer; margin: 0.5rem; text-decoration: none; display: inline-block; transition: background 0.3s ease, color 0.3s ease; }
-.btn:hover { background: #ffd700; color: #000; }
+.btn { background: #ffa500; color: white; padding: 1rem 2rem; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer; margin: 0.5rem; text-decoration: none; display: inline-block; }
+.btn:hover { background: #ff8c00; }
 
 footer { background: #1a1a1a; color: white; text-align: center; padding: 2rem; }
-
-#back-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #ffa500;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 50%;
-    font-size: 20px;
-    text-decoration: none;
-}
 
 @media (max-width: 768px) {
     .hero h1 { font-size: 1.5rem; }
     .products { grid-template-columns: 1fr; }
     .product-img { height: 200px; }
 }
-
-@media (max-width: 480px) {
-    .btn { width: 100%; text-align: center; margin-bottom: 10px; }
-    .hero { padding: 3rem 1rem; }
-}
 </style>
 </head>
 <body>
-
 <header>
-<div class="header-content">
-<div class="logo">Mini Pelles Direct</div>
-<img src="https://i.postimg.cc/Gh6QbQwF/logo-mini-pelle-direct.png" alt="Logo Mini Pelles Direct">
-</div>
+    <div class="header-content">
+        <div class="logo">Mini Pelles Direct</div>
+        <img src="https://i.postimg.cc/Gh6QbQwF/logo-mini-pelle-direct.png" alt="Logo Mini Pelles Direct">
+    </div>
 </header>
 
 <section class="hero">
-<h1>Location & Vente de Mini Pelles en Bretagne</h1>
-<p>Découvrez notre gamme complète - Location courte et longue durée disponible</p>
+    <h1>Location & Vente de Mini Pelles en Bretagne</h1>
+    <p>Découvrez notre gamme complète - Location courte et longue durée disponible</p>
 </section>
 
 <div class="badges">
-<div class="badge"><div class="badge-icon">🚚</div><div class="badge-title">Livraison rapide</div><div class="badge-sub">Secteur Bain-de-Bretagne</div></div>
-<div class="badge"><div class="badge-icon">🛡️</div><div class="badge-title">Garantie 1 an</div><div class="badge-sub">Sur toutes nos machines</div></div>
-<div class="badge"><div class="badge-icon">⭐</div><div class="badge-title">4,9/5 étoiles</div><div class="badge-sub">37 avis clients</div></div>
+    <div class="badge">
+        <div class="badge-icon">🚚</div>
+        <div class="badge-title">Livraison rapide</div>
+        <div class="badge-sub">Secteur Bain-de-Bretagne</div>
+    </div>
+    <div class="badge">
+        <div class="badge-icon">🛡️</div>
+        <div class="badge-title">Garantie 1 an</div>
+        <div class="badge-sub">Sur toutes nos machines</div>
+    </div>
+    <div class="badge">
+        <div class="badge-icon">⭐</div>
+        <div class="badge-title">4,9/5 étoiles</div>
+        <div class="badge-sub">37 avis clients</div>
+    </div>
 </div>
 
 <div class="container">
-
 <!-- Catalogue -->
 <section class="section">
 <h2>📦 Notre Catalogue</h2>
 <div class="products">
-<div class="product">
-<div class="product-img"><img src="https://i.postimg.cc/grWvr62c/temp-Image-Fmqu-K0.jpg" alt="Mini Pelle 1T"></div>
-<div class="product-content">
-<span class="product-tag">1 Tonne</span>
-<h3>Mini Pelle 1T</h3>
-<ul class="specs">
-<li><span class="spec-label">Poids</span><span>≈ 1 000 kg</span></li>
-<li><span class="spec-label">Puissance</span><span>8,6 kW (11,5 HP)</span></li>
-<li><span class="spec-label">Prof. creusement</span><span>1,65 m</span></li>
-<li><span class="spec-label">Hauteur déversement</span><span>1,80 m</span></li>
-<li><span class="spec-label">Largeur</span><span>930 mm</span></li>
-<li><span class="spec-label">Motorisation</span><span>Diesel</span></li>
-</ul>
-<p><strong>✅ Idéale pour :</strong> Travaux légers, jardinage, petits terrassements, tranchées, accès restreint</p>
+    <div class="product">
+        <div class="product-img">
+            <img src="https://i.postimg.cc/grWvr62c/temp-Image-Fmqu-K0.jpg" alt="Mini Pelle 1T">
+        </div>
+        <div class="product-content">
+            <span class="product-tag">1 Tonne</span>
+            <h3>Mini Pelle 1T</h3>
+            <ul class="specs">
+                <li><span class="spec-label">Poids</span><span>≈ 1 000 kg</span></li>
+                <li><span class="spec-label">Puissance</span><span>8,6 kW (11,5 HP)</span></li>
+                <li><span class="spec-label">Prof. creusement</span><span>1,65 m</span></li>
+                <li><span class="spec-label">Hauteur déversement</span><span>1,80 m</span></li>
+                <li><span class="spec-label">Largeur</span><span>930 mm</span></li>
+                <li><span class="spec-label">Motorisation</span><span>Diesel</span></li>
+            </ul>
+            <p><strong>✅ Idéale pour :</strong> Travaux légers, jardinage, petits terrassements, tranchées, accès restreint</p>
+        </div>
+    </div>
+
+    <div class="product">
+        <div class="product-img">
+            <img src="https://i.postimg.cc/YCc1w1fS/mini-pelle-1t5.jpg" alt="Mini Pelle 1,5T">
+        </div>
+        <div class="product-content">
+            <span class="product-tag">1,5 Tonne</span>
+            <h3>Mini Pelle 1,5T</h3>
+            <ul class="specs">
+                <li><span class="spec-label">Poids</span><span>≈ 1 500 kg</span></li>
+                <li><span class="spec-label">Puissance</span><span>10,3 kW (13,8 HP)</span></li>
+                <li><span class="spec-label">Prof. creusement</span><span>2,20 m</span></li>
+                <li><span class="spec-label">Hauteur déversement</span><span>2,35 m</span></li>
+                <li><span class="spec-label">Largeur</span><span>990 mm</span></li>
+                <li><span class="spec-label">Motorisation</span><span>Diesel</span></li>
+            </ul>
+            <p><strong>✅ Idéale pour :</strong> Terrassements moyens, fondations, VRD, travaux de démolition légère</p>
+        </div>
+    </div>
 </div>
+</section>
+
+<!-- Sections Accessoires, À propos, Garantie, Livraison, Avis, FAQ, Contact -->
+<section class="section">
+<h2>🔧 Accessoires Compatibles</h2>
+<div class="info-box">
+<h3>🌀 Tarière</h3>
+<p>Idéale pour percer des trous de fondation, plantation d'arbres et installation de poteaux</p>
+<p style="margin-top: 0.5rem; color: #ffa500; font-weight: bold;">Compatible 1T & 1,5T</p>
+</div>
+<div class="info-box">
+<h3>🔨 BRH (Brise Roche Hydraulique)</h3>
+<p>Équipement de démolition pour briser béton, roches et surfaces dures</p>
+<p style="margin-top: 0.5rem; color: #ffa500; font-weight: bold;">Compatible 1T & 1,5T</p>
+</div>
+<div class="info-box">
+<h3>⛓️ Chenilles de Remplacement</h3>
+<p>Chenilles haute qualité pour assurer une adhérence optimale sur tous terrains</p>
+<p style="margin-top: 0.5rem; color: #ffa500; font-weight: bold;">Pour 1T & 1,5T</p>
+</div>
+<div class="info-box">
+<h3>⛏️ Godets</h3>
+<p>Plusieurs tailles disponibles selon vos besoins : <strong>400mm</strong> (Tranchée), <strong>600mm</strong> (Standard), <strong>800mm</strong> (Curage)</p>
+<p style="margin-top: 0.5rem; color: #ffa500; font-weight: bold;">Compatible 1T & 1,5T</p>
+</div>
+</section>
+
+<!-- À Propos -->
+<section class="section">
+<h2>🏢 À Propos</h2>
+<div class="info-box">
+<h3>Mini Pelles Direct</h3>
+<p>Entreprise basée à <strong>Bain-de-Bretagne (35)</strong>, spécialisée dans la location et la vente de mini pelles. Nous proposons des machines compactes et performantes pour particuliers, artisans et professionnels du BTP.</p>
+</div>
+<div class="info-box">
+<h3>Nos Services</h3>
+<ul>
+<li>✓ <strong>Location</strong> courte et longue durée</li>
+<li>✓ <strong>Vente</strong> de matériel neuf avec garantie 1 an</li>
+<li>✓ <strong>Accessoires</strong> compatibles</li>
+<li>✓ <strong>Conseils</strong> personnalisés</li>
+</ul>
+</div>
+</section>
+
+<!-- Garantie -->
+<section class="section">
+<h2>🛡️ Garantie</h2>
+<div class="info-box">
+<p>Toutes nos mini pelles sont couvertes par une <strong>garantie constructeur de 12 mois</strong> à compter de la date de livraison.</p>
+</div>
+</section>
+
+<!-- Livraison -->
+<section class="section">
+<h2>🚚 Livraison</h2>
+<div class="info-box">
+<p>Service de livraison dans le secteur proche de Bain-de-Bretagne. Coût défini directement avec le client.</p>
+</div>
+</section>
+
+<!-- Avis clients -->
+<section class="section">
+<h2>⭐ Avis Clients - 4,9/5</h2>
+<div class="info-box">
+<p><strong>Thomas D.</strong> ⭐⭐⭐⭐⭐</p>
+<p style="font-style: italic;">"Excellente expérience ! Machine en parfait état, conseils au top."</p>
+</div>
+<div class="info-box">
+<p><strong>Marie L.</strong> ⭐⭐⭐⭐⭐</p>
+<p style="font-style: italic;">"Super service!! Livraison rapide et équipe très réactive."</p>
+</div>
+<div class="info-box">
+<p><strong>Jean-Pierre M.</strong> ⭐⭐⭐⭐⭐</p>
+<p style="font-style: italic;">"Artisan paysagiste, j'ai trouvé la machine parfaite."</p>
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+<h2>❓ Questions Fréquentes</h2>
+<div class="info-box">
+<h3>Quelle mini pelle choisir ?</h3>
+<p>1T pour travaux légers, 1,5T pour terrassements importants.</p>
+</div>
+<div class="info-box">
+<h3>Location ou vente ?</h3>
+<p>Nous proposons location courte/longue durée et vente de matériel neuf.</p>
+</div>
+<div class="info-box">
+<h3>Accessoires compatibles ?</h3>
+<p>Tous les accessoires sont compatibles avec les deux modèles.</p>
+</div>
+</section>
+
+<!-- Contact -->
+<section class="section">
+<h2>📧 Contact</h2>
+<div class="info-box">
+<h3>Contactez-nous</h3>
+<p><strong>📞 Téléphone :</strong> <a href="tel:0699168777" style="color: #ffa500;">06 99 16 87 77</a></p>
+<p><strong>📧 Email :</strong> <a href="mailto:glamwear@hotmail.fr" style="color: #ffa500;">glamwear@hotmail.fr</a></p>
+<p><strong>📍 Adresse :</strong> Bain-de-Bretagne, Ille-et-Vilaine (35)</p>
+<p style="margin-top: 1rem;"><em>Du lundi au vendredi, 8h-18h</em></p>
+<div style="text-align: center; margin-top: 2rem;">
+<a href="tel:0699168777" class="btn">📞 Appelez-nous</a>
+<a href="mailto:glamwear@hotmail.fr" class="btn">📧 Email</a>
+</div>
+</div>
+</section>
+
 </div>
 
-<div class="product">
-<div class="product-img"><img src="https://i.postimg.cc/YCc1w1f
+<footer>
+<p>&copy; 2025 Mini Pelles Direct - Tous droits réservés</p>
+<p style="margin-top: 0.5rem; font-size: 0.9rem;">Bain-de-Bretagne, Ille-et-Vilaine (35)</p>
+</footer>
+</body>
+</html>
