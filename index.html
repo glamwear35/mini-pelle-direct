@@ -141,6 +141,17 @@
         </div>
     </div>
     <!-- ======================================= -->
+    <script>
+        document.getElementById('promo-close').addEventListener('click', function() {
+            var overlay = document.getElementById('promo-overlay');
+            overlay.style.transition = 'opacity 0.3s';
+            overlay.style.opacity = '0';
+            setTimeout(function() { overlay.style.display = 'none'; }, 300);
+        });
+    </script>
+
+</body>
+</html>
 
     <header>
         <div class="header-content">
