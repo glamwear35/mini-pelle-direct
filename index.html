@@ -99,24 +99,25 @@
             white-space: nowrap;
         }
         #promo-footer a:hover { background: #ffd700; }
-        #promo-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 10;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.75);
-            border: 1.5px solid rgba(255,255,255,0.3);
-            color: #fff;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
+       #promo-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 99999;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.75);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    pointer-events: auto;
+}
         #promo-close:hover { background: rgba(180,0,0,0.85); }
         /* ====================== */
     </style>
