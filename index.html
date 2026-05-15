@@ -141,12 +141,39 @@
     </div>
     <!-- ======================================= -->
 
-    <header>
-        <div class="header-content">
-            <div class="logo">Mini Pelles Direct</div>
-            <div style="opacity: 0.3; font-size: 2rem;">🚜</div>
-        </div>
-    </header>
+   <header>
+    <div class="header-content">
+        <div class="logo">Mini Pelles Direct</div>
+        <nav>
+            <button onclick="document.getElementById('nav-menu').classList.toggle('open')" style="background:none; border:none; color:#ffd700; font-size:1.5rem; cursor:pointer;">☰</button>
+            <ul id="nav-menu" style="display:none; position:absolute; top:60px; right:1rem; background:#111; border:1px solid #ffd700; border-radius:8px; list-style:none; padding:0.5rem 0; min-width:220px; z-index:9999;">
+                <li><a href="#catalogue" style="display:block; padding:0.7rem 1.5rem; color:white; text-decoration:none;">📦 Notre Catalogue</a></li>
+                <li><a href="#accessoires" style="display:block; padding:0.7rem 1.5rem; color:white; text-decoration:none;">🔧 Accessoires compatibles</a></li>
+                <li><a href="#apropos" style="display:block; padding:0.7rem 1.5rem; color:white; text-decoration:none;">🏢 À propos</a></li>
+                <li><a href="#garantie" style="display:block; padding:0.7rem 1.5rem; color:white; text-decoration:none;">🛡️ Garantie</a></li>
+                <li><a href="#livraison" style="display:block; padding:0.7rem 1.5rem; color:white; text-decoration:none;">🚚 Livraison</a></li>
+                <li><a href="#avis" style="display:block; padding:0.7rem 1.5rem; color:white; text-decoration:none;">⭐ Avis clients</a></li>
+                <li><a href="#faq" style="display:block; padding:0.7rem 1.5rem; color:white; text-decoration:none;">❓ Questions fréquentes</a></li>
+                <li><a href="#contact" style="display:block; padding:0.7rem 1.5rem; color:white; text-decoration:none;">📧 Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<script>
+    document.addEventListener('click', function(e) {
+        var menu = document.getElementById('nav-menu');
+        if (!e.target.closest('nav')) {
+            menu.classList.remove('open');
+        }
+    });
+    document.getElementById('nav-menu').addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') this.classList.remove('open');
+    });
+    var style = document.createElement('style');
+    style.textContent = '#nav-menu.open { display: block !important; }';
+    document.head.appendChild(style);
+</script>
 
     <section class="hero">
         <h1>Location & Vente de Mini Pelles en Bretagne</h1>
