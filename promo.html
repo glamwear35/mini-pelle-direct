@@ -7,11 +7,9 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; }
-
         header { background: #000; color: white; padding: 1rem; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.5rem; font-weight: bold; color: #ffd700; text-decoration: none; }
-
         .hero { background: #111; color: white; text-align: center; padding: 3rem 1rem; border-bottom: 4px solid #ffd700; }
         .hero-badge { display: inline-block; background: #ffd700; color: #111; font-weight: 800; font-size: 0.9rem; padding: 0.4rem 1.2rem; border-radius: 20px; margin-bottom: 1rem; letter-spacing: 1px; }
         .hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem; }
@@ -21,11 +19,9 @@
         .price-label { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
         .price-amount { font-size: 3.5rem; font-weight: 900; line-height: 1; }
         .price-ttc { font-size: 1rem; font-weight: 700; }
-
         .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
         .section { background: white; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
         .section h2 { color: #111; font-size: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 3px solid #ffd700; }
-
         .machine-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
         .spec-list { list-style: none; }
         .spec-list li { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
@@ -33,32 +29,26 @@
         .spec-list .label { color: #666; font-weight: 600; }
         .spec-list .value { font-weight: 700; color: #111; }
         .tag { display: inline-block; background: #ffd700; color: #111; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 20px; margin-bottom: 1rem; }
-
         .highlight-box { background: #111; color: white; border-radius: 10px; padding: 1.2rem 1.5rem; margin-top: 1rem; border-left: 4px solid #ffd700; }
         .highlight-box h3 { color: #ffd700; margin-bottom: 0.5rem; font-size: 1rem; }
         .highlight-box p { font-size: 0.9rem; color: #ccc; }
-
         .remorque-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
-
         .accessories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem; }
         .accessory-card { background: #f9f9f9; border: 2px solid #eee; border-radius: 10px; padding: 1.2rem; text-align: center; transition: border-color 0.2s; }
         .accessory-card:hover { border-color: #ffd700; }
         .accessory-name { font-weight: 700; font-size: 0.9rem; color: #111; }
         .accessory-detail { font-size: 0.8rem; color: #888; margin-top: 0.2rem; }
-
         .points-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
         .point-card { background: #f9f9f9; border-radius: 10px; padding: 1.2rem; text-align: center; }
         .point-icon { font-size: 2rem; margin-bottom: 0.5rem; }
         .point-title { font-weight: 700; font-size: 0.95rem; color: #111; }
         .point-sub { font-size: 0.82rem; color: #666; margin-top: 0.2rem; }
-
         .recap { background: #111; color: white; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; text-align: center; }
         .recap h2 { color: #ffd700; font-size: 1.4rem; margin-bottom: 1.5rem; }
         .recap-items { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; margin-bottom: 1.5rem; }
         .recap-item { background: #222; border: 1px solid #444; border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.9rem; color: #ddd; }
         .recap-price { font-size: 3rem; font-weight: 900; color: #ffd700; }
         .recap-price-label { font-size: 0.9rem; color: #aaa; margin-top: 0.3rem; }
-
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
         .form-group.full { grid-column: 1 / -1; }
@@ -66,14 +56,11 @@
         .form-group input, .form-group textarea, .form-group select { padding: 0.75rem 1rem; border: 1.5px solid #ddd; border-radius: 8px; font-size: 0.95rem; font-family: Arial, sans-serif; transition: border-color 0.2s; }
         .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #ffd700; }
         .form-group textarea { resize: vertical; min-height: 100px; }
-
         .btn-gold { display: inline-block; background: #ffd700; color: #111; font-size: 1.1rem; font-weight: 700; padding: 1rem 2.5rem; border-radius: 10px; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s; margin: 0.5rem; }
         .btn-gold:hover { background: #ffc200; }
         .cta-block { text-align: center; padding: 1rem 0 0.5rem; }
-
         footer { background: #1a1a1a; color: white; text-align: center; padding: 2rem; margin-top: 2rem; }
         footer a { color: #ffd700; text-decoration: none; }
-
         @media (max-width: 768px) {
             .hero h1 { font-size: 1.8rem; }
             .price-amount { font-size: 2.5rem; }
@@ -86,7 +73,7 @@
     <header>
         <div class="header-content">
             <a href="/index.html" class="logo">Mini Pelles Direct</a>
-            <div style="opacity:0.3; font-size:2rem;">🚜</div>
+            <img src="/logo%20mini%20pelle%20direct.png" alt="Logo Mini Pelles Direct" style="height:45px; object-fit:contain;">
         </div>
     </header>
 
@@ -97,10 +84,8 @@
         <div class="price-block">
             <div class="price-label">Le pack complet</div>
             <div class="price-amount">19 990 €</div>
-            <div class="price-ttc">TTC — Livraison incluse</div>
+            <div class="price-ttc">TTC — Livraison en option</div>
         </div>
-        <br>
-        <a href="https://mini-pelle-direct.web.app/devis.html" class="btn-gold">📋 Réserver maintenant</a>
     </div>
 
     <div class="container">
@@ -120,7 +105,7 @@
                     </ul>
                     <div class="highlight-box">
                         <h3>🔧 Chenilles télescopiques</h3>
-                        <p>Largeur ajustable pour plus de stabilité et d'accessibilité sur tous types de terrain. Idéal pour les zones difficiles d'accès.</p>
+                        <p>Largeur ajustable pour plus de stabilité et d'accessibilité sur tous types de terrain.</p>
                     </div>
                 </div>
                 <div>
@@ -196,7 +181,7 @@
                 <div class="point-card">
                     <div class="point-icon">🚚</div>
                     <div class="point-title">Livraison rapide</div>
-                    <div class="point-sub">Secteur Bretagne, livraison incluse</div>
+                    <div class="point-sub">Secteur Bretagne, livraison en option</div>
                 </div>
                 <div class="point-card">
                     <div class="point-icon">🔧</div>
@@ -232,14 +217,10 @@
                 <span class="recap-item">✅ Tarière</span>
                 <span class="recap-item">✅ BRH brise-roche</span>
                 <span class="recap-item">✅ Attache rapide</span>
-                <span class="recap-item">✅ Livraison incluse</span>
+                <span class="recap-item">✅ Livraison en option</span>
             </div>
             <div class="recap-price">19 990 €</div>
             <div class="recap-price-label">TTC — Pack complet — Offre limitée</div>
-        </div>
-
-        <div class="cta-block">
-            <a href="https://mini-pelle-direct.web.app/devis.html" class="btn-gold">📋 Faire un devis & Réserver en ligne</a>
         </div>
 
         <div class="section" style="margin-top:2rem;">
