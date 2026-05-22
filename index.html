@@ -205,7 +205,49 @@
         </div>
     </div>
 
-    <!-- LA SUITE DE TON CATALOGUE CONTINUE ICI -->
+    <!-- SLIDER BANNIERE -->
+<div id="slider" style="position:relative; width:100%; overflow:hidden; background:#111; height:380px; margin-bottom:2rem;">
+  <div id="slider-inner" style="display:flex; transition:transform 0.6s ease; height:100%;">
+    <div style="min-width:100%; position:relative; display:flex; align-items:center; justify-content:space-between; padding:2rem 4rem;">
+      <div style="color:white; max-width:50%;">
+        <div style="background:#ffd700; color:#111; display:inline-block; padding:0.3rem 1rem; border-radius:20px; font-weight:700; font-size:0.85rem; margin-bottom:1rem;">LOCATION & VENTE</div>
+        <h2 style="font-size:2.5rem; font-weight:900; margin-bottom:0.5rem;">Mini Pelle <span style="color:#ffd700;">800 kg</span></h2>
+        <p style="color:#ccc; font-size:1rem; margin-bottom:1.5rem;">Compacte et maniable — Idéale pour les accès restreints et travaux légers</p>
+        <a href="#catalogue" style="background:#ffd700; color:#111; padding:0.8rem 2rem; border-radius:8px; font-weight:700; text-decoration:none;">Voir la machine →</a>
+      </div>
+      <img src="/mini-pelle-kt562.jpg" alt="Mini Pelle 800kg" style="height:320px; object-fit:contain;">
+    </div>
+    <div style="min-width:100%; position:relative; display:flex; align-items:center; justify-content:space-between; padding:2rem 4rem;">
+      <div style="color:white; max-width:50%;">
+        <div style="background:#ffd700; color:#111; display:inline-block; padding:0.3rem 1rem; border-radius:20px; font-weight:700; font-size:0.85rem; margin-bottom:1rem;">PACK COMPLET</div>
+        <h2 style="font-size:2.5rem; font-weight:900; margin-bottom:0.5rem;">Mini Pelle <span style="color:#ffd700;">1T5</span></h2>
+        <p style="color:#ccc; font-size:1rem; margin-bottom:1.5rem;">Puissante et polyvalente — Pack complet avec 6 accessoires dès 19 990€ TTC</p>
+        <a href="/promo.html" style="background:#ffd700; color:#111; padding:0.8rem 2rem; border-radius:8px; font-weight:700; text-decoration:none;">Voir le pack →</a>
+      </div>
+      <img src="/mini-pelle-1t5.jpg" alt="Mini Pelle 1T5" style="height:320px; object-fit:contain;">
+    </div>
+  </div>
+  <button onclick="changerSlide(-1)" style="position:absolute; left:1rem; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.2); border:none; color:white; font-size:2rem; width:44px; height:44px; border-radius:50%; cursor:pointer;">‹</button>
+  <button onclick="changerSlide(1)" style="position:absolute; right:1rem; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.2); border:none; color:white; font-size:2rem; width:44px; height:44px; border-radius:50%; cursor:pointer;">›</button>
+  <div style="position:absolute; bottom:1rem; left:50%; transform:translateX(-50%); display:flex; gap:8px;">
+    <span id="dot-0" style="width:10px; height:10px; border-radius:50%; background:#ffd700; cursor:pointer;" onclick="allerSlide(0)"></span>
+    <span id="dot-1" style="width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.4); cursor:pointer;" onclick="allerSlide(1)"></span>
+  </div>
+</div>
+<script>
+var sliderIndex = 0;
+function changerSlide(dir) { allerSlide(sliderIndex + dir); }
+function allerSlide(n) {
+  sliderIndex = (n + 2) % 2;
+  document.getElementById("slider-inner").style.transform = "translateX(-" + (sliderIndex * 100) + "%)";
+  document.getElementById("dot-0").style.background = sliderIndex === 0 ? "#ffd700" : "rgba(255,255,255,0.4)";
+  document.getElementById("dot-1").style.background = sliderIndex === 1 ? "#ffd700" : "rgba(255,255,255,0.4)";
+}
+setInterval(function(){ changerSlide(1); }, 4000);
+</script>
+<!-- FIN SLIDER -->
+
+<!-- LA SUITE DE TON CATALOGUE CONTINUE ICI -->
 
     <div class="container">
         <section class="section">
