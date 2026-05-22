@@ -211,6 +211,11 @@
             <div class="badge-title">Entreprise vérifiée</div>
             <div class="badge-sub">SIRET enregistré</div>
         </div>
+        <div class="badge">
+            <div class="badge-icon">🚜</div>
+            <div class="badge-title" id="compteur">87</div>
+            <div class="badge-sub">Machines louées</div>
+        </div>
         <div style="text-align:center; padding: 30px 20px;">
             <a href="https://mini-pelle-direct.web.app/devis.html"
                style="display:inline-block; background:#F59E0B; color:#1a1a1a; font-size:18px; font-weight:700; padding:16px 40px; border-radius:12px; text-decoration:none;">
@@ -451,6 +456,17 @@ setInterval(function(){ changerSlide(1); }, 5000);
             document.getElementById('promo-overlay').style.display = 'none';
         });
     </script>
+<script>
+var count = 0;
+var target = 87;
+var duration = 2000;
+var step = Math.ceil(target / (duration / 30));
+var timer = setInterval(function() {
+    count += step;
+    if (count >= target) { count = target; clearInterval(timer); }
+    document.getElementById("compteur").textContent = count;
+}, 30);
+</script>
 </body>
 </body>
 </html>
@@ -559,6 +575,11 @@ body { font-<!DOCTYPE html>
             <div class="badge-icon">✅</div>
             <div class="badge-title">Entreprise vérifiée</div>
             <div class="badge-sub">SIRET enregistré</div>
+        </div>
+        <div class="badge">
+            <div class="badge-icon">🚜</div>
+            <div class="badge-title" id="compteur">87</div>
+            <div class="badge-sub">Machines louées</div>
         </div>
     </div>
 
