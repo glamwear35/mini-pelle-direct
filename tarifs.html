@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifs Vente — Mini Pelles Direct</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; }
+        header { background: #000; color: white; padding: 1rem; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #ffd700; text-decoration: none; }
+        nav button { background: none; border: none; color: #ffd700; font-size: 1.5rem; cursor: pointer; }
+        #nav-menu { display: none; position: absolute; top: 60px; right: 1rem; background: #111; border: 1px solid #ffd700; border-radius: 8px; list-style: none; padding: 0.5rem 0; min-width: 220px; z-index: 9999; }
+        #nav-menu.open { display: block; }
+        #nav-menu li a { display: block; padding: 0.7rem 1.5rem; color: white; text-decoration: none; }
+        #nav-menu li a:hover { background: #222; }
+
+        .hero { background: #111; color: white; text-align: center; padding: 3rem 1rem; border-bottom: 4px solid #ffd700; }
+        .hero h1 { font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem; }
+        .hero h1 span { color: #ffd700; }
+        .hero p { color: #ccc; font-size: 1rem; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+        .section { background: white; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        .section h2 { color: #111; font-size: 1.4rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 3px solid #ffd700; }
+
+        .machine-card { background: #111; color: white; border-radius: 12px; padding: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .machine-card h3 { font-size: 1.4rem; color: #ffd700; margin-bottom: 0.5rem; }
+        .machine-card p { color: #ccc; font-size: 0.9rem; }
+        .machine-price { text-align: right; }
+        .machine-price .ht { font-size: 2.5rem; font-weight: 900; color: #ffd700; }
+        .machine-price .ttc { font-size: 1rem; color: #aaa; }
+
+        .accessories-table { width: 100%; border-collapse: collapse; }
+        .accessories-table th { background: #111; color: #ffd700; padding: 0.75rem 1rem; text-align: left; font-size: 0.9rem; }
+        .accessories-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+        .accessories-table tr:last-child td { border-bottom: none; }
+        .accessories-table tr:hover td { background: #fffbf0; }
+        .price-ht { font-weight: 700; color: #111; }
+        .price-ttc { color: #888; font-size: 0.85rem; }
+
+        .remorque-card { background: #f9f9f9; border-radius: 10px; padding: 1.5rem; border-left: 4px solid #ffd700; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .remorque-card h3 { font-weight: 700; color: #111; margin-bottom: 0.3rem; }
+        .remorque-card p { color: #666; font-size: 0.9rem; }
+        .sur-devis { background: #ffd700; color: #111; font-weight: 700; padding: 0.5rem 1.2rem; border-radius: 8px; font-size: 0.95rem; }
+
+        .note { background: #fffbf0; border: 1px solid #ffd700; border-radius: 10px; padding: 1rem 1.5rem; font-size: 0.9rem; color: #555; margin-top: 1rem; }
+
+        .cta-block { text-align: center; padding: 1rem 0; }
+        .btn-gold { display: inline-block; background: #ffd700; color: #111; font-size: 1.1rem; font-weight: 700; padding: 1rem 2.5rem; border-radius: 10px; text-decoration: none; margin: 0.5rem; }
+        .btn-gold:hover { background: #ffc200; }
+
+        footer { background: #1a1a1a; color: white; text-align: center; padding: 2rem; margin-top: 2rem; }
+        footer a { color: #ffd700; text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.5rem; }
+            .machine-price .ht { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <a href="/index.html" class="logo">Mini Pelles Direct</a>
+            <nav>
+                <button onclick="document.getElementById('nav-menu').classList.toggle('open')">☰</button>
+                <ul id="nav-menu">
+                    <li><a href="#catalogue">📦 Notre Catalogue</a></li>
+                    <li><a href="#accessoires">🔧 Accessoires compatibles</a></li>
+                    <li><a href="#apropos">🏢 À propos</a></li>
+                    <li><a href="#garantie">🛡️ Garantie</a></li>
+                    <li><a href="#livraison">🚚 Livraison</a></li>
+                    <li><a href="#avis">⭐ Avis clients</a></li>
+                    <li><a href="#faq">❓ Questions fréquentes</a></li>
+                    <li><a href="#contact">📧 Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>Tarifs <span>Vente</span></h1>
+        <p>Prix HT — TVA 20% applicable</p>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h2>🚜 Mini Pelle</h2>
+            <div class="machine-card">
+                <div>
+                    <h3>Mini Pelle Kubota D901 — 1,5 tonne</h3>
+                    <p>Moteur Diesel 3 cylindres — Chenilles télescopiques — État neuf</p>
+                </div>
+                <div class="machine-price">
+                    <div class="ht">13 325 €</div>
+                    <div class="ttc">HT — soit 15 990 € TTC</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔩 Accessoires</h2>
+            <table class="accessories-table">
+                <thead>
+                    <tr>
+                        <th>Accessoire</th>
+                        <th>Prix HT</th>
+                        <th>Prix TTC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Godet 200mm</td>
+                        <td class="price-ht">149 €</td>
+                        <td class="price-ttc">178,80 € TTC</td>
+                    </tr>
+                    <tr>
+                        <td>Godet 400mm</td>
+                        <td class="price-ht">159 €</td>
+                        <td class="price-ttc">190,80 € TTC</td>
+                    </tr>
+                    <tr>
+                        <td>Godet 600mm</td>
+                        <td class="price-ht">179 €</td>
+                        <td class="price-ttc">214,80 € TTC</td>
+                    </tr>
+                    <tr>
+                        <td>Attache rapide</td>
+                        <td class="price-ht">109 €</td>
+                        <td class="price-ttc">130,80 € TTC</td>
+                    </tr>
+                    <tr>
+                        <td>Tarière</td>
+                        <td class="price-ht">315 €</td>
+                        <td class="price-ttc">378 € TTC</td>
+                    </tr>
+                    <tr>
+                        <td>BRH (Brise-roche hydraulique)</td>
+                        <td class="price-ht">995 €</td>
+                        <td class="price-ttc">1 194 € TTC</td>
+                    </tr>
+                    <tr>
+                        <td>Burin BRH</td>
+                        <td class="price-ht">49 €</td>
+                        <td class="price-ttc">58,80 € TTC</td>
+                    </tr>
+                    <tr>
+                        <td>Châssis télescopique</td>
+                        <td class="price-ht">449 €</td>
+                        <td class="price-ttc">538,80 € TTC</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="note">💡 Les godets 200mm, 400mm, 600mm, la tarière, le BRH et l'attache rapide sont inclus dans le pack complet à 19 990€ TTC.</div>
+        </div>
+
+        <div class="section">
+            <h2>🚛 Remorque</h2>
+            <div class="remorque-card">
+                <div>
+                    <h3>Remorque double essieux — PTAC 2000 kg</h3>
+                    <p>Pour le transport de la mini pelle — État neuf</p>
+                </div>
+                <span class="sur-devis">Sur devis</span>
+            </div>
+        </div>
+
+        <div class="cta-block">
+            <a href="/promo.html" class="btn-gold">🎁 Voir le pack complet 19 990€</a>
+            <a href="https://mini-pelle-direct.web.app/devis.html" class="btn-gold">📋 Faire un devis</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 <a href="/index.html">Mini Pelles Direct</a> — Bretagne | Vente & Location de mini pelles</p>
+    </footer>
+
+    <script>
+        document.addEventListener('click', function(e) {
+            var menu = document.getElementById('nav-menu');
+            if (!e.target.closest('nav')) menu.classList.remove('open');
+        });
+        document.getElementById('nav-menu').addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') this.classList.remove('open');
+        });
+    </script>
+
+</body>
+</html>
