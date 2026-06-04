@@ -824,15 +824,27 @@
 <div class="cursor" id="cursor"></div>
 
 <!-- HEADER -->
-<header>
-  <div>
-    <div class="logo">Mini Pelle <span>Direct</span></div>
-    <div class="logo-tag">Bain-de-Bretagne</div>
-  </div>
-  <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.2em; color:#555; text-transform:uppercase;">
-    Galerie &nbsp;/&nbsp; Nos machines en action
-  </div>
+<header style="background:#111;padding:0 20px;position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;height:64px;">
+  <a href="/" style="display:flex;align-items:center;"><img src="/logo mini pelle direct.png" alt="Mini Pelle Direct" style="height:44px;" /></a>
+  <a href="tel:0699168777" style="color:#FFD700;font-weight:700;text-decoration:none;font-size:1rem;">📞 06 99 16 87 77</a>
+  <button onclick="document.getElementById('galNav').classList.toggle('open');this.classList.toggle('open')" style="display:none;background:none;border:none;cursor:pointer;padding:8px;" id="galToggle">
+    <span style="display:block;width:24px;height:2px;background:#fff;margin:5px 0;"></span>
+    <span style="display:block;width:24px;height:2px;background:#fff;margin:5px 0;"></span>
+    <span style="display:block;width:24px;height:2px;background:#fff;margin:5px 0;"></span>
+  </button>
+  <nav id="galNav" style="display:flex;gap:6px;flex-wrap:wrap;">
+    <a href="/catalogue.html" style="color:#fff;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;" onmouseover="this.style.background='#FFD700';this.style.color='#111'" onmouseout="this.style.background='';this.style.color='#fff'">🚜 Catalogue</a>
+    <a href="/tarifs.html" style="color:#fff;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;" onmouseover="this.style.background='#FFD700';this.style.color='#111'" onmouseout="this.style.background='';this.style.color='#fff'">💰 Tarifs</a>
+    <a href="/promo.html" style="color:#fff;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;" onmouseover="this.style.background='#FFD700';this.style.color='#111'" onmouseout="this.style.background='';this.style.color='#fff'">🎁 Promo</a>
+    <a href="/galerie.html" style="color:#111;background:#FFD700;font-weight:700;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;">📸 Galerie</a>
+    <a href="/devis.html" style="color:#fff;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;" onmouseover="this.style.background='#FFD700';this.style.color='#111'" onmouseout="this.style.background='';this.style.color='#fff'">📋 Devis</a>
+    <a href="/contact.html" style="color:#fff;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;" onmouseover="this.style.background='#FFD700';this.style.color='#111'" onmouseout="this.style.background='';this.style.color='#fff'">📧 Contact</a>
+    <a href="/faq.html" style="color:#fff;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;" onmouseover="this.style.background='#FFD700';this.style.color='#111'" onmouseout="this.style.background='';this.style.color='#fff'">❓ FAQ</a>
+  </nav>
 </header>
+<style>
+  @media(max-width:768px){#galToggle{display:block !important;}#galNav{display:none !important;flex-direction:column;gap:0;position:absolute;top:64px;left:0;right:0;background:#111;padding:10px 0;z-index:99;border-top:2px solid #FFD700;}#galNav.open{display:flex !important;}#galNav a{padding:12px 20px !important;border-radius:0 !important;border-bottom:1px solid #222;}}
+</style>
 
 <!-- HERO CAROUSEL -->
 <section class="hero" id="hero">
@@ -1188,6 +1200,14 @@
     });
   });
 </script>
+
+
+<!-- CTA galerie -->
+<div style="background:#FFD700;padding:40px 20px;text-align:center;">
+  <h2 style="font-size:1.4rem;font-weight:900;color:#111;margin-bottom:8px;">Vous voulez ces résultats sur votre chantier ?</h2>
+  <p style="color:#333;margin-bottom:20px;">Réservez votre mini pelle — Livraison sous 24h</p>
+  <a href="/devis.html" style="background:#111;color:#FFD700;font-weight:800;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:1rem;">📋 Demander un devis gratuit</a>
+</div>
 
 </body>
 </html>
