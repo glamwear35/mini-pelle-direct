@@ -7,14 +7,20 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; }
-        header { background: #000; color: white; padding: 1rem; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: bold; color: #ffd700; text-decoration: none; }
-        nav button { background: none; border: none; color: #ffd700; font-size: 1.5rem; cursor: pointer; }
-        #nav-menu { display: none; position: absolute; top: 60px; right: 1rem; background: #111; border: 1px solid #ffd700; border-radius: 8px; list-style: none; padding: 0.5rem 0; min-width: 220px; z-index: 9999; }
-        #nav-menu.open { display: block; }
-        #nav-menu li a { display: block; padding: 0.7rem 1.5rem; color: white; text-decoration: none; }
-        #nav-menu li a:hover { background: #222; }
+        header { background: #111; padding: 0 20px; position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        header a.logo img { height: 44px; }
+        header a.tel { color: #FFD700; font-weight: 700; text-decoration: none; font-size: 1rem; }
+        header nav { display: flex; gap: 6px; flex-wrap: wrap; }
+        header nav a { color: #fff; text-decoration: none; font-size: .85rem; padding: 6px 10px; border-radius: 4px; transition: background .2s; }
+        header nav a:hover, header nav a.active { background: #FFD700; color: #111; font-weight: 700; }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; margin: 5px 0; transition: all .3s; }
+        @media(max-width: 768px) {
+          header nav { display: none; flex-direction: column; gap: 0; position: absolute; top: 64px; left: 0; right: 0; background: #111; padding: 10px 0; z-index: 99; border-top: 2px solid #FFD700; }
+          header nav.open { display: flex; }
+          header nav a { padding: 12px 20px; font-size: 1rem; border-radius: 0; border-bottom: 1px solid #222; }
+          .nav-toggle { display: block; }
+        }
 
         .hero { background: #111; color: white; text-align: center; padding: 3rem 1rem; border-bottom: 4px solid #ffd700; }
         .hero h1 { font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem; }
@@ -86,24 +92,19 @@
 <body>
 
     <header>
-        <div class="header-content">
-            <a href="/index.html" class="logo">Mini Pelles Direct</a>
-            <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
-  <nav>
-                <button onclick="document.getElementById('nav-menu').classList.toggle('open')">☰</button>
-                <ul id="nav-menu">
-                    <li><a href="#catalogue">📦 Notre Catalogue</a></li>
-                    <li><a href="#accessoires">🔧 Accessoires compatibles</a></li>
-                    <li><a href="#apropos">🏢 À propos</a></li>
-                    <li><a href="#garantie">🛡️ Garantie</a></li>
-                    <li><a href="#livraison">🚚 Livraison</a></li>
-                    <li><a href="#avis">⭐ Avis clients</a></li>
-                    <li><a href="#faq">❓ Questions fréquentes</a></li>
-                    <li><a href="#contact">📧 Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <a class="logo" href="/"><img src="/logo mini pelle direct.png" alt="Mini Pelle Direct" /></a>
+  <a class="tel" href="tel:0699168777">📞 06 99 16 87 77</a>
+  <button class="nav-toggle" id="navToggle" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <nav id="mainNav">
+    <a href="/catalogue.html">🚜 Catalogue</a>
+    <a href="/tarifs.html" class="active">💰 Tarifs</a>
+    <a href="/promo.html">🎁 Promo</a>
+    <a href="/location.html">📅 Location</a>
+    <a href="/blog/">📝 Blog</a>
+    <a href="/contact.html">📧 Contact</a>
+    <a href="/faq.html">❓ FAQ</a>
+  </nav>
+</header>
 
     <div class="hero">
         <h1>Tarifs <span>Vente</span></h1>
@@ -209,7 +210,7 @@
 
         <div class="cta-block">
             <a href="/promo.html" class="btn-gold">🎁 Voir le pack complet 19 990€</a>
-            <a href="https://mini-pelle-direct.web.app/devis.html" class="btn-gold">📋 Faire un devis</a>
+            <a href="https://www.mini-pelle-direct.com/devis.html" class="btn-gold">📋 Faire un devis</a>
         </div>
 
     </div>
