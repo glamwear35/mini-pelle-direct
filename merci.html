@@ -1,118 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Commande confirmée — Mini Pelle Direct</title>
-<style>
-  body { background:#0a0a0a; color:#fff; font-family:sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; text-align:center; }
-  .box { max-width:500px; padding:3rem; }
-  h1 { color:#FFD700; font-size:3rem; margin-bottom:1rem; }
-  p { color:#aaa; margin-bottom:2rem; line-height:1.7; }
-  a { background:#FFD700; color:#000; padding:0.8rem 2rem; text-decoration:none; font-weight:700; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demande envoyée — Mini Pelle Direct</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #111; color: #fff; font-family: 'Segoe UI', Arial, sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
 
-  /* ── Menu hamburger mobile ── */
-  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
-  .nav-toggle span {
-    display: block; width: 24px; height: 2px;
-    background: #fff; margin: 5px 0; transition: all .3s;
-  }
-  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-toggle.open span:nth-child(2) { opacity: 0; }
-  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .box { max-width: 560px; width: 100%; }
 
-  @media(max-width: 768px) {
-    nav {
-      display: none; flex-direction: column; gap: 0;
-      position: absolute; top: 64px; left: 0; right: 0;
-      background: #111; padding: 10px 0; z-index: 99;
-      border-top: 2px solid #FFD700;
-    }
-    nav.open { display: flex; }
-    nav a { padding: 12px 20px; font-size: 1rem; border-radius: 0; border-bottom: 1px solid #222; }
-    .nav-toggle { display: block; }
-  }
+    .check { font-size: 4rem; margin-bottom: 16px; }
 
+    h1 { color: #FFD700; font-size: 2.2rem; font-weight: 900; margin-bottom: 16px; }
+
+    .sous-titre { color: #aaa; font-size: 1.05rem; line-height: 1.7; margin-bottom: 32px; }
+
+    .etapes { background: #1a1a1a; border-radius: 12px; padding: 24px; margin-bottom: 32px; text-align: left; }
+    .etapes h2 { font-size: 1rem; font-weight: 700; color: #FFD700; margin-bottom: 16px; }
+    .etape { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+    .etape:last-child { margin-bottom: 0; }
+    .etape .num { background: #FFD700; color: #111; font-weight: 900; font-size: .85rem; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .etape p { font-size: .93rem; color: #ccc; line-height: 1.5; }
+
+    .tel-block { background: #FFD700; border-radius: 10px; padding: 18px 24px; margin-bottom: 24px; }
+    .tel-block p { color: #111; font-size: .9rem; margin-bottom: 6px; }
+    .tel-block a { color: #111; font-weight: 900; font-size: 1.3rem; text-decoration: none; }
+
+    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: #FFD700; color: #111; font-weight: 800; text-decoration: none; padding: 14px 26px; border-radius: 8px; font-size: 1rem; transition: transform .15s; }
+    .btn-primary:hover { transform: scale(1.03); }
+    .btn-secondary { background: #222; color: #fff; font-weight: 700; text-decoration: none; padding: 14px 26px; border-radius: 8px; font-size: 1rem; border: 1px solid #444; transition: transform .15s; }
+    .btn-secondary:hover { transform: scale(1.03); }
   </style>
 </head>
 <body>
+
   <div class="box">
-    <h1>✅ Merci !</h1>
-    <p>Votre commande a bien été enregistrée. Nous vous contacterons dans les plus brefs délais pour organiser la livraison.</p>
-    <p>📞 06 99 16 87 77</p>
-    <a href="/index.html">Retour au site</a>
+    <div class="check">✅</div>
+    <h1>Demande envoyée !</h1>
+    <p class="sous-titre">Votre demande a bien été reçue. Nous vous répondons sous 24h pour confirmer votre réservation.</p>
+
+    <div class="etapes">
+      <h2>📋 Les prochaines étapes</h2>
+      <div class="etape">
+        <span class="num">1</span>
+        <p>Nous étudions votre demande et vérifions la disponibilité de la machine.</p>
+      </div>
+      <div class="etape">
+        <span class="num">2</span>
+        <p>Nous vous contactons par téléphone ou email pour confirmer les détails.</p>
+      </div>
+      <div class="etape">
+        <span class="num">3</span>
+        <p>La machine est livrée sur votre chantier à la date convenue.</p>
+      </div>
+    </div>
+
+    <div class="tel-block">
+      <p>Une urgence ? Appelez-nous directement</p>
+      <a href="tel:0699168777">📞 06 99 16 87 77</a>
+    </div>
+
+    <div class="btns">
+      <a href="/" class="btn-primary">🏠 Retour au site</a>
+      <a href="/devis.html" class="btn-secondary">📋 Nouvelle demande</a>
+    </div>
   </div>
 
-<!-- Bouton téléphone fixe mobile -->
-<div id="mobile-cta" style="
-  display:none;
-  position:fixed;
-  bottom:0; left:0; right:0;
-  z-index:9999;
-  background:#FFD700;
-  padding:14px 20px;
-  text-align:center;
-  box-shadow:0 -3px 15px rgba(0,0,0,0.3);
-">
-  <a href="tel:0699168777" style="
-    color:#111;
-    font-weight:900;
-    font-size:1.1rem;
-    text-decoration:none;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-  ">📞 Appeler — 06 99 16 87 77</a>
-</div>
-<script>
-  if(window.innerWidth <= 768) document.getElementById('mobile-cta').style.display='block';
-  window.addEventListener('resize', function(){
-    document.getElementById('mobile-cta').style.display = window.innerWidth <= 768 ? 'block' : 'none';
-  });
-</script>
-
-
-<!-- Bouton WhatsApp flottant -->
-<a href="https://wa.me/33699168777?text=Bonjour%2C%20je%20souhaite%20un%20renseignement%20sur%20la%20location%20de%20mini%20pelle." 
-   target="_blank"
-   style="
-     position:fixed;
-     bottom:80px;
-     right:20px;
-     z-index:9998;
-     background:#25D366;
-     color:#fff;
-     width:56px;
-     height:56px;
-     border-radius:50%;
-     display:flex;
-     align-items:center;
-     justify-content:center;
-     font-size:1.6rem;
-     box-shadow:0 4px 15px rgba(0,0,0,0.25);
-     text-decoration:none;
-     transition:transform .2s;
-   "
-   onmouseover="this.style.transform='scale(1.1)'"
-   onmouseout="this.style.transform='scale(1)'"
-   title="Nous contacter sur WhatsApp">💬</a>
-
-
-<script>
-  function toggleNav() {
-    const nav = document.querySelector('nav');
-    const btn = document.getElementById('navToggle');
-    nav.classList.toggle('open');
-    btn.classList.toggle('open');
-  }
-  // Fermer menu au clic sur un lien
-  document.querySelectorAll('nav a').forEach(a => {
-    a.addEventListener('click', () => {
-      document.querySelector('nav').classList.remove('open');
-      document.getElementById('navToggle').classList.remove('open');
-    });
-  });
-</script>
+<a href="https://wa.me/33699168777?text=Bonjour%2C%20je%20souhaite%20un%20renseignement%20sur%20la%20location%20de%20mini%20pelle." target="_blank" style="position:fixed;bottom:20px;right:20px;z-index:9998;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 15px rgba(0,0,0,0.25);text-decoration:none;" title="WhatsApp">💬</a>
 
 </body>
 </html>
