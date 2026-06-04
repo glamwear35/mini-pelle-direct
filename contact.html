@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contactez Mini Pelle Direct à Bain-de-Bretagne. Demande de devis, renseignements location ou vente de mini pelle en Bretagne (35)." />
+  <title>Contact — Mini Pelle Direct</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow: #FFD700;
+      --black: #111111;
+      --dark: #1a1a1a;
+      --gray: #f5f5f5;
+      --text: #333;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #fff;
+      color: var(--text);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--black);
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    header a.logo img { height: 44px; }
+    header a.tel {
+      color: var(--yellow);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    nav { display: flex; gap: 6px; flex-wrap: wrap; }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: background .2s;
+    }
+    nav a:hover, nav a.active { background: var(--yellow); color: var(--black); font-weight: 700; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--black);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px 50px;
+    }
+    .hero h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 10px; }
+    .hero h1 span { color: var(--yellow); }
+    .hero p { font-size: 1.1rem; opacity: .8; }
+
+    /* ── LAYOUT ── */
+    .contact-wrap {
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+    @media(max-width: 768px) {
+      .contact-wrap { grid-template-columns: 1fr; gap: 30px; }
+    }
+
+    /* ── INFOS ── */
+    .info-block h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      border-left: 4px solid var(--yellow);
+      padding-left: 12px;
+    }
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 22px;
+      background: var(--gray);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .info-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .info-item strong { display: block; font-size: .85rem; text-transform: uppercase; color: #888; margin-bottom: 3px; }
+    .info-item a { color: var(--black); font-weight: 700; text-decoration: none; font-size: 1.05rem; }
+    .info-item a:hover { color: #b8960e; }
+    .info-item p { font-size: 1rem; color: var(--black); }
+
+    .cta-direct {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--yellow);
+      color: var(--black);
+      font-weight: 800;
+      text-decoration: none;
+      padding: 14px 22px;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-top: 10px;
+      transition: transform .15s;
+    }
+    .cta-direct:hover { transform: scale(1.03); }
+
+    /* ── FORMULAIRE ── */
+    .form-block h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      border-left: 4px solid var(--yellow);
+      padding-left: 12px;
+    }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: .9rem;
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color .2s;
+      background: #fafafa;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--yellow);
+      background: #fff;
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .btn-send {
+      width: 100%;
+      background: var(--yellow);
+      color: var(--black);
+      font-weight: 800;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      padding: 15px;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-send:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,215,0,.4); }
+    .btn-send:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    .form-msg {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: .95rem;
+      text-align: center;
+    }
+    .form-msg.success { background: #d4edda; color: #155724; display: block; }
+    .form-msg.error   { background: #f8d7da; color: #721c24; display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      color: #aaa;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 60px;
+      font-size: .9rem;
+    }
+    footer a { color: var(--yellow); text-decoration: none; }
+    .footer-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+    .footer-links a { color: #ccc; font-size: .85rem; }
+    .footer-links a:hover { color: var(--yellow); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="/"><img src="/logo mini pelle direct.png" alt="Mini Pelle Direct" /></a>
+  <a class="tel" href="tel:0699168777">📞 06 99 16 87 77</a>
+  <nav>
+    <a href="/catalogue.html">🚜 Catalogue</a>
+    <a href="/tarifs.html">💰 Tarifs</a>
+    <a href="/promo.html">🎁 Promo</a>
+    <a href="/location.html">📅 Location</a>
+    <a href="/contact.html" class="active">📧 Contact</a>
+    <a href="/faq.html">❓ FAQ</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>📧 <span>Contactez-nous</span></h1>
+  <p>Une question ? Un devis ? On vous répond sous 24h.</p>
+</section>
+
+<!-- CONTENU -->
+<div class="contact-wrap">
+
+  <!-- INFOS -->
+  <div class="info-block">
+    <h2>Nos coordonnées</h2>
+
+    <div class="info-item">
+      <span class="info-icon">📞</span>
+      <div>
+        <strong>Téléphone</strong>
+        <a href="tel:0699168777">06 99 16 87 77</a>
+      </div>
+    </div>
+
+    <div class="info-item">
+      <span class="info-icon">📧</span>
+      <div>
+        <strong>Email</strong>
+        <a href="mailto:contact@mini-pelle-direct.com">contact@mini-pelle-direct.com</a>
+      </div>
+    </div>
+
+    <div class="info-item">
+      <span class="info-icon">📍</span>
+      <div>
+        <strong>Localisation</strong>
+        <p>Bain-de-Bretagne (35)<br>Livraison dans un rayon de 30 km</p>
+      </div>
+    </div>
+
+    <div class="info-item">
+      <span class="info-icon">🕐</span>
+      <div>
+        <strong>Disponibilité</strong>
+        <p>Lun–Sam : 8h–19h<br>Réponse sous 24h</p>
+      </div>
+    </div>
+
+    <a class="cta-direct" href="tel:0699168777">📞 Appel direct — 06 99 16 87 77</a>
+  </div>
+
+  <!-- FORMULAIRE -->
+  <div class="form-block">
+    <h2>Envoyer un message</h2>
+    <div id="contactForm">
+
+      <div class="form-group">
+        <label for="name">Votre nom *</label>
+        <input type="text" id="name" placeholder="Jean Dupont" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" placeholder="jean@exemple.fr" required />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Téléphone</label>
+        <input type="tel" id="phone" placeholder="06 XX XX XX XX" />
+      </div>
+
+      <div class="form-group">
+        <label for="sujet">Sujet *</label>
+        <select id="sujet" required>
+          <option value="">-- Choisir --</option>
+          <option value="Demande de devis location">📅 Demande de devis location</option>
+          <option value="Demande de devis vente">🛒 Demande de devis vente</option>
+          <option value="Renseignement machine">🚜 Renseignement machine</option>
+          <option value="Renseignement livraison">🚚 Renseignement livraison</option>
+          <option value="Autre">💬 Autre</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea id="message" placeholder="Décrivez votre projet ou posez votre question..." required></textarea>
+      </div>
+
+      <button class="btn-send" id="btnSend" onclick="sendContact()">
+        ✉️ Envoyer le message
+      </button>
+
+      <div class="form-msg" id="formMsg"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="/catalogue.html">Catalogue</a>
+    <a href="/tarifs.html">Tarifs</a>
+    <a href="/promo.html">Pack Promo</a>
+    <a href="/location.html">Location</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <p>📍 Bain-de-Bretagne (35) — <a href="tel:0699168777">06 99 16 87 77</a></p>
+  <p style="margin-top:8px">© 2026 Mini Pelle Direct — Tous droits réservés</p>
+</footer>
+
+<script>
+  emailjs.init("DacAC6gXgD340-WQX");
+
+  function sendContact() {
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const sujet   = document.getElementById('sujet').value;
+    const message = document.getElementById('message').value.trim();
+    const btn     = document.getElementById('btnSend');
+    const msg     = document.getElementById('formMsg');
+
+    msg.className = 'form-msg';
+    msg.style.display = 'none';
+
+    if (!name || !email || !sujet || !message) {
+      msg.textContent = '⚠️ Merci de remplir tous les champs obligatoires.';
+      msg.className = 'form-msg error';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = '⏳ Envoi en cours...';
+
+    emailjs.send("service_minipelle", "template_znkv35b", {
+      from_name:    name,
+      from_email:   email,
+      phone:        phone || 'Non renseigné',
+      sujet:        sujet,
+      message:      message,
+    })
+    .then(() => {
+      msg.textContent = '✅ Message envoyé ! Nous vous répondrons sous 24h.';
+      msg.className = 'form-msg success';
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('sujet').value = '';
+      document.getElementById('message').value = '';
+      btn.textContent = '✉️ Envoyer le message';
+      btn.disabled = false;
+    })
+    .catch((err) => {
+      console.error(err);
+      msg.textContent = '❌ Erreur lors de l\'envoi. Appelez-nous au 06 99 16 87 77.';
+      msg.className = 'form-msg error';
+      btn.textContent = '✉️ Envoyer le message';
+      btn.disabled = false;
+    });
+  }
+</script>
+
+</body>
+</html>
