@@ -266,5 +266,35 @@
         <p>© 2026 <a href="/index.html">Mini Pelles Direct</a> — Bretagne | Vente & Location de mini pelles</p>
     </footer>
 
+
+<!-- Bouton téléphone fixe mobile -->
+<div id="mobile-cta" style="
+  display:none;
+  position:fixed;
+  bottom:0; left:0; right:0;
+  z-index:9999;
+  background:#FFD700;
+  padding:14px 20px;
+  text-align:center;
+  box-shadow:0 -3px 15px rgba(0,0,0,0.3);
+">
+  <a href="tel:0699168777" style="
+    color:#111;
+    font-weight:900;
+    font-size:1.1rem;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  ">📞 Appeler — 06 99 16 87 77</a>
+</div>
+<script>
+  if(window.innerWidth <= 768) document.getElementById('mobile-cta').style.display='block';
+  window.addEventListener('resize', function(){
+    document.getElementById('mobile-cta').style.display = window.innerWidth <= 768 ? 'block' : 'none';
+  });
+</script>
+
 </body>
 </html>

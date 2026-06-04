@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Location Mini Pelle — Mini Pelle Direct</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: #f5f5f5;
+    color: #111;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+  }
+
+  header {
+    background: #111;
+    border-bottom: 3px solid #FFD700;
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo { color: #fff; font-weight: 900; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .logo span { color: #FFD700; }
+  .logo-sub { color: #666; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
+  .back-btn { background: none; border: 1px solid rgba(255,215,0,0.3); color: #fff; padding: 0.5rem 1.2rem; text-decoration: none; font-size: 0.85rem; transition: background 0.2s; }
+  .back-btn:hover { background: #FFD700; color: #111; }
+
+  .page-hero {
+    background: #111;
+    color: #fff;
+    text-align: center;
+    padding: 3rem 2rem;
+    border-bottom: 3px solid #FFD700;
+  }
+
+  .page-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; text-transform: uppercase; }
+  .page-hero h1 span { color: #FFD700; }
+  .page-hero p { color: #aaa; margin-top: 0.5rem; font-size: 0.95rem; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+  /* STEPS */
+  .step {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-num {
+    background: #FFD700;
+    color: #111;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .step-title { font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* MACHINE CARDS */
+  .machine-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .machine-card {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    text-align: center;
+  }
+
+  .machine-card:hover { border-color: #FFD700; background: #fffbea; }
+  .machine-card.selected { border-color: #FFD700; background: #fffbea; }
+  .machine-card.selected::after { content: '✓'; position: absolute; top: 0.8rem; right: 0.8rem; background: #FFD700; color: #111; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.8rem; }
+  .machine-card { position: relative; }
+
+  .machine-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .machine-name { font-weight: 800; font-size: 1rem; margin-bottom: 0.3rem; }
+  .machine-price { color: #888; font-size: 0.85rem; }
+
+  /* DUREE */
+  .duree-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+  .duree-card {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 1.2rem;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .duree-card:hover { border-color: #FFD700; background: #fffbea; }
+  .duree-card.selected { border-color: #FFD700; background: #fffbea; }
+  .duree-label { font-weight: 800; font-size: 1rem; margin-bottom: 0.3rem; }
+  .duree-price { color: #FFD700; font-weight: 900; font-size: 1.3rem; }
+
+  /* OPTIONS */
+  .option-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 0.6rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .option-item:hover { background: #fffbea; }
+  .option-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: #FFD700; }
+  .option-label { flex: 1; font-weight: 600; }
+  .option-price { color: #888; font-size: 0.9rem; }
+
+  /* LIVRAISON */
+  .livraison-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 0.6rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .livraison-item:hover { border-color: #FFD700; background: #fffbea; }
+  .livraison-item.selected { border-color: #FFD700; background: #fffbea; }
+  .livraison-item input[type="radio"] { accent-color: #FFD700; width: 18px; height: 18px; }
+
+  /* CALENDRIER */
+  .calendar-wrap { overflow-x: auto; }
+
+  .calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .cal-nav {
+    background: #FFD700;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cal-month { font-weight: 800; font-size: 1.1rem; text-transform: capitalize; }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+
+  .cal-day-name {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #888;
+    padding: 0.4rem 0;
+    text-transform: uppercase;
+  }
+
+  .cal-day {
+    text-align: center;
+    padding: 0.5rem 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+
+  .cal-day:hover { background: #fffbea; }
+  .cal-day.selected { background: #FFD700; color: #111; font-weight: 800; }
+  .cal-day.empty { cursor: default; }
+  .cal-day.past { color: #ccc; cursor: not-allowed; }
+
+  /* FORMULAIRE */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group.full { grid-column: span 2; }
+
+  label { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: #555; }
+
+  input, textarea, select {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    background: #fff;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #FFD700;
+  }
+
+  textarea { min-height: 100px; resize: vertical; }
+
+  /* RECAP */
+  .recap {
+    background: #111;
+    color: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: sticky;
+    top: 1rem;
+  }
+
+  .recap-title { color: #FFD700; font-weight: 900; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+
+  .recap-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.9rem;
+    color: #aaa;
+  }
+
+  .recap-line:last-of-type { border-bottom: none; }
+
+  .recap-total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    border-top: 2px solid #FFD700;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: #FFD700;
+  }
+
+  /* SUBMIT */
+  .btn-submit {
+    width: 100%;
+    background: #FFD700;
+    color: #111;
+    border: none;
+    padding: 1.1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 1.5rem;
+  }
+
+  .btn-submit:hover { background: #111; color: #FFD700; transform: translateY(-2px); }
+
+  /* SUCCESS */
+  .success-msg {
+    display: none;
+    background: #111;
+    color: #fff;
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  .success-msg h3 { color: #FFD700; font-size: 1.5rem; margin-bottom: 1rem; }
+  .success-msg p { color: #aaa; line-height: 1.7; }
+
+  footer {
+    background: #FFD700;
+    color: #111;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 600px) {
+    .machine-grid, .duree-grid, .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">Mini Pelle <span>Direct</span></div>
+    <div class="logo-sub">Bain-de-Bretagne</div>
+  </div>
+  <a href="/index.html" class="back-btn">← Retour au site</a>
+</header>
+
+<div class="page-hero">
+  <h1>Location <span>Mini Pelle</span></h1>
+  <p>Configurez votre devis et réservez en ligne — Réponse sous 2h</p>
+</div>
+
+<div class="container">
+
+  <!-- STEP 1 : MACHINE -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Choisissez votre machine</div>
+    </div>
+    <div class="machine-grid">
+      <div class="machine-card selected" onclick="selectMachine(this, 'Mini Pelle 800 kg', 130, 250, 450)" id="m1">
+        <div class="machine-icon">🚜</div>
+        <div class="machine-name">Mini Pelle 800 kg</div>
+        <div class="machine-price">À partir de 130€ / jour TTC</div>
+      </div>
+      <div class="machine-card" onclick="selectMachine(this, 'Mini Pelle 1T5', 160, 300, 550)" id="m2">
+        <div class="machine-icon">🚜</div>
+        <div class="machine-name">Mini Pelle 1T5</div>
+        <div class="machine-price">À partir de 160€ / jour TTC</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 : DUREE -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Durée de location</div>
+    </div>
+    <div class="duree-grid">
+      <div class="duree-card selected" onclick="selectDuree(this, 'Journée', 0)">
+        <div class="duree-label">Journée</div>
+        <div class="duree-price" id="price-jour">130€</div>
+      </div>
+      <div class="duree-card" onclick="selectDuree(this, 'Week-end', 1)">
+        <div class="duree-label">Week-end</div>
+        <div class="duree-price" id="price-we">250€</div>
+      </div>
+      <div class="duree-card" onclick="selectDuree(this, 'Semaine', 2)">
+        <div class="duree-label">Semaine</div>
+        <div class="duree-price" id="price-sem">450€</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 : OPTIONS -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Options & accessoires</div>
+    </div>
+    <label class="option-item">
+      <input type="checkbox" onchange="updateTotal()" data-price="25" data-label="Godet 200mm"> 
+      <span class="option-label">🪣 Godet 200mm (tranchée)</span>
+      <span class="option-price">+25€</span>
+    </label>
+    <label class="option-item">
+      <input type="checkbox" onchange="updateTotal()" data-price="25" data-label="Godet 400mm">
+      <span class="option-label">🪣 Godet 400mm (terrassement)</span>
+      <span class="option-price">+25€</span>
+    </label>
+    <label class="option-item">
+      <input type="checkbox" onchange="updateTotal()" data-price="25" data-label="Godet 600mm">
+      <span class="option-label">🪣 Godet 600mm (curage)</span>
+      <span class="option-price">+25€</span>
+    </label>
+    <label class="option-item">
+      <input type="checkbox" onchange="updateTotal()" data-price="35" data-label="Tarière">
+      <span class="option-label">🔩 Tarière</span>
+      <span class="option-price">+35€</span>
+    </label>
+    <label class="option-item">
+      <input type="checkbox" onchange="updateTotal()" data-price="45" data-label="BRH (Brise Roche Hydraulique)">
+      <span class="option-label">🔨 BRH (Brise Roche Hydraulique)</span>
+      <span class="option-price">+45€</span>
+    </label>
+    <label class="option-item">
+      <input type="checkbox" onchange="updateTotal()" data-price="20" data-label="Attache rapide">
+      <span class="option-label">⚡ Attache rapide</span>
+      <span class="option-price">+20€</span>
+    </label>
+  </div>
+
+  <!-- STEP 4 : LIVRAISON -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">Livraison</div>
+    </div>
+    <label class="livraison-item selected" onclick="selectLivraison(this, 'Sans livraison', 0)">
+      <input type="radio" name="livraison" checked> 
+      <span class="option-label">🚶 Sans livraison (retrait sur place)</span>
+      <span class="option-price">0€</span>
+    </label>
+    <label class="livraison-item" onclick="selectLivraison(this, 'Livraison 0–30 km', 69)">
+      <input type="radio" name="livraison">
+      <span class="option-label">🚚 Livraison 0–30 km</span>
+      <span class="option-price">+69€</span>
+    </label>
+    <label class="livraison-item" onclick="selectLivraison(this, 'Livraison +30 km', 0)">
+      <input type="radio" name="livraison">
+      <span class="option-label">🚚 Livraison +30 km</span>
+      <span class="option-price">Sur devis</span>
+    </label>
+  </div>
+
+  <!-- STEP 5 : DATE -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div class="step-title">Choisissez une date</div>
+    </div>
+    <div class="calendar-wrap">
+      <div class="calendar-header">
+        <button class="cal-nav" onclick="changeMonth(-1)">‹</button>
+        <div class="cal-month" id="cal-month"></div>
+        <button class="cal-nav" onclick="changeMonth(1)">›</button>
+      </div>
+      <div class="calendar-grid" id="cal-grid"></div>
+    </div>
+    <p style="margin-top:1rem; font-size:0.85rem; color:#888;">Date sélectionnée : <strong id="selected-date">—</strong></p>
+  </div>
+
+  <!-- STEP 6 : COORDONNEES -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">6</div>
+      <div class="step-title">Vos coordonnées</div>
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Prénom</label>
+        <input type="text" id="prenom" placeholder="Jean" required>
+      </div>
+      <div class="form-group">
+        <label>Nom</label>
+        <input type="text" id="nom" placeholder="Dupont" required>
+      </div>
+      <div class="form-group">
+        <label>Téléphone</label>
+        <input type="tel" id="tel" placeholder="06 XX XX XX XX" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="jean@exemple.fr" required>
+      </div>
+      <div class="form-group full">
+        <label>Adresse du chantier</label>
+        <input type="text" id="adresse" placeholder="123 rue du chantier, 35470 Bain-de-Bretagne">
+      </div>
+      <div class="form-group full">
+        <label>Message (optionnel)</label>
+        <textarea id="message" placeholder="Précisez vos besoins, type de travaux..."></textarea>
+      </div>
+    </div>
+
+    <!-- RECAP -->
+    <div class="recap" id="recap">
+      <div class="recap-title">📋 Récapitulatif TTC</div>
+      <div class="recap-line"><span id="r-machine">Mini Pelle 800 kg</span><span id="r-machine-price">130€</span></div>
+      <div class="recap-line" id="r-options-line" style="display:none"><span>Options</span><span id="r-options-price">0€</span></div>
+      <div class="recap-line" id="r-livraison-line" style="display:none"><span id="r-livraison">Livraison</span><span id="r-livraison-price">0€</span></div>
+      <div class="recap-total"><span>Total TTC</span><span id="r-total">130€</span></div>
+    </div>
+
+    <button class="btn-submit" onclick="submitForm()">📩 Envoyer ma demande</button>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-msg" id="success">
+    <h3>✅ Demande envoyée !</h3>
+    <p>Nous vous contacterons rapidement pour confirmer votre réservation.<br><br>📞 06 99 16 87 77</p>
+  </div>
+
+</div>
+
+<footer>
+  <span>Mini Pelle Direct — Bain-de-Bretagne</span>
+  <span>📞 06 99 16 87 77</span>
+</footer>
+
+<script>
+  // STATE
+  let state = {
+    machine: 'Mini Pelle 800 kg',
+    prices: [130, 250, 450],
+    dureeIdx: 0,
+    dureeLabel: 'Journée',
+    optionsTotal: 0,
+    livraisonLabel: 'Sans livraison',
+    livraisonPrice: 0,
+    date: null,
+  };
+
+  // MACHINE
+  function selectMachine(el, name, j, we, sem) {
+    document.querySelectorAll('.machine-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.machine = name;
+    state.prices = [j, we, sem];
+    document.getElementById('price-jour').textContent = j + '€';
+    document.getElementById('price-we').textContent = we + '€';
+    document.getElementById('price-sem').textContent = sem + '€';
+    updateTotal();
+  }
+
+  // DUREE
+  function selectDuree(el, label, idx) {
+    document.querySelectorAll('.duree-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.dureeIdx = idx;
+    state.dureeLabel = label;
+    updateTotal();
+  }
+
+  // LIVRAISON
+  function selectLivraison(el, label, price) {
+    document.querySelectorAll('.livraison-item').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.livraisonLabel = label;
+    state.livraisonPrice = price;
+    updateTotal();
+  }
+
+  // TOTAL
+  function updateTotal() {
+    let optTotal = 0;
+    document.querySelectorAll('.option-item input:checked').forEach(cb => {
+      optTotal += parseInt(cb.dataset.price);
+    });
+    state.optionsTotal = optTotal;
+
+    const base = state.prices[state.dureeIdx];
+    const total = base + optTotal + state.livraisonPrice;
+
+    document.getElementById('r-machine').textContent = state.machine + ' — ' + state.dureeLabel;
+    document.getElementById('r-machine-price').textContent = base + '€';
+
+    const optLine = document.getElementById('r-options-line');
+    if (optTotal > 0) {
+      optLine.style.display = 'flex';
+      document.getElementById('r-options-price').textContent = '+' + optTotal + '€';
+    } else {
+      optLine.style.display = 'none';
+    }
+
+    const livLine = document.getElementById('r-livraison-line');
+    if (state.livraisonPrice > 0) {
+      livLine.style.display = 'flex';
+      document.getElementById('r-livraison').textContent = state.livraisonLabel;
+      document.getElementById('r-livraison-price').textContent = '+' + state.livraisonPrice + '€';
+    } else {
+      livLine.style.display = 'none';
+    }
+
+    document.getElementById('r-total').textContent = total + '€';
+  }
+
+  // CALENDRIER
+  let calDate = new Date();
+  const days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+  const months = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+
+  function renderCalendar() {
+    const y = calDate.getFullYear();
+    const m = calDate.getMonth();
+    document.getElementById('cal-month').textContent = months[m] + ' ' + y;
+
+    const grid = document.getElementById('cal-grid');
+    grid.innerHTML = '';
+
+    days.forEach(d => {
+      const el = document.createElement('div');
+      el.className = 'cal-day-name';
+      el.textContent = d;
+      grid.appendChild(el);
+    });
+
+    const firstDay = new Date(y, m, 1).getDay();
+    const offset = firstDay === 0 ? 6 : firstDay - 1;
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    for (let i = 0; i < offset; i++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day empty';
+      grid.appendChild(el);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const el = document.createElement('div');
+      const date = new Date(y, m, d);
+      el.className = 'cal-day';
+      el.textContent = d;
+
+      if (date < today) {
+        el.classList.add('past');
+      } else {
+        el.onclick = () => {
+          document.querySelectorAll('.cal-day.selected').forEach(c => c.classList.remove('selected'));
+          el.classList.add('selected');
+          state.date = date;
+          document.getElementById('selected-date').textContent = d + ' ' + months[m] + ' ' + y;
+        };
+      }
+
+      grid.appendChild(el);
+    }
+  }
+
+  function changeMonth(dir) {
+    calDate.setMonth(calDate.getMonth() + dir);
+    renderCalendar();
+  }
+
+  renderCalendar();
+  updateTotal();
+
+  // SUBMIT
+  function submitForm() {
+    const prenom = document.getElementById('prenom').value;
+    const nom = document.getElementById('nom').value;
+    const tel = document.getElementById('tel').value;
+    const email = document.getElementById('email').value;
+
+    if (!prenom || !nom || !tel || !email) {
+      alert('Veuillez remplir tous les champs obligatoires.');
+      return;
+    }
+
+    // Build mailto
+    const opts = Array.from(document.querySelectorAll('.option-item input:checked'))
+      .map(cb => cb.dataset.label).join(', ') || 'Aucune';
+
+    const body = `Nouvelle demande de location:\n\nMachine: ${state.machine}\nDurée: ${state.dureeLabel}\nDate: ${state.date ? document.getElementById('selected-date').textContent : 'Non précisée'}\nOptions: ${opts}\nLivraison: ${state.livraisonLabel}\nTotal TTC: ${document.getElementById('r-total').textContent}\n\nContact:\nNom: ${prenom} ${nom}\nTél: ${tel}\nEmail: ${email}\nAdresse: ${document.getElementById('adresse').value}\nMessage: ${document.getElementById('message').value}`;
+
+    window.location.href = `mailto:contact@mini-pelle-direct.com?subject=Demande de location - ${state.machine}&body=${encodeURIComponent(body)}`;
+
+    document.getElementById('success').style.display = 'block';
+    document.getElementById('success').scrollIntoView({behavior:'smooth'});
+  }
+</script>
+
+
+<!-- Bouton téléphone fixe mobile -->
+<div id="mobile-cta" style="
+  display:none;
+  position:fixed;
+  bottom:0; left:0; right:0;
+  z-index:9999;
+  background:#FFD700;
+  padding:14px 20px;
+  text-align:center;
+  box-shadow:0 -3px 15px rgba(0,0,0,0.3);
+">
+  <a href="tel:0699168777" style="
+    color:#111;
+    font-weight:900;
+    font-size:1.1rem;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  ">📞 Appeler — 06 99 16 87 77</a>
+</div>
+<script>
+  if(window.innerWidth <= 768) document.getElementById('mobile-cta').style.display='block';
+  window.addEventListener('resize', function(){
+    document.getElementById('mobile-cta').style.display = window.innerWidth <= 768 ? 'block' : 'none';
+  });
+</script>
+
+</body>
+</html>

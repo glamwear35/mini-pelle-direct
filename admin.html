@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Mini Pelle Direct</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0a0a0a; color:#fff; font-family:'Segoe UI',sans-serif; min-height:100vh; }
+
+  /* LOGIN */
+  .login-screen {
+    display:flex; align-items:center; justify-content:center;
+    min-height:100vh; background:#0a0a0a;
+  }
+  .login-box {
+    background:#111; border:2px solid #FFD700; border-radius:16px;
+    padding:3rem; width:100%; max-width:400px; text-align:center;
+  }
+  .login-box h1 { color:#FFD700; font-size:1.5rem; margin-bottom:0.5rem; }
+  .login-box p { color:#666; font-size:0.85rem; margin-bottom:2rem; }
+  .login-box input {
+    width:100%; padding:0.9rem 1rem; background:#1a1a1a; border:1px solid #333;
+    border-radius:8px; color:#fff; font-size:1rem; margin-bottom:1rem;
+  }
+  .login-box input:focus { outline:none; border-color:#FFD700; }
+  .login-btn {
+    width:100%; background:#FFD700; color:#111; border:none; padding:1rem;
+    font-weight:900; font-size:1rem; border-radius:8px; cursor:pointer;
+    text-transform:uppercase; letter-spacing:0.1em;
+  }
+  .login-btn:hover { background:#fff; }
+  .login-error { color:#ff4444; font-size:0.85rem; margin-top:0.5rem; display:none; }
+
+  /* DASHBOARD */
+  .dashboard { display:none; }
+
+  header {
+    background:#111; border-bottom:3px solid #FFD700;
+    padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo { font-weight:900; font-size:1.3rem; text-transform:uppercase; }
+  .logo span { color:#FFD700; }
+  .header-right { display:flex; align-items:center; gap:1rem; }
+  .badge-count {
+    background:#FFD700; color:#111; padding:0.3rem 0.8rem;
+    border-radius:20px; font-weight:900; font-size:0.85rem;
+  }
+  .logout-btn {
+    background:none; border:1px solid #333; color:#aaa;
+    padding:0.4rem 1rem; border-radius:6px; cursor:pointer; font-size:0.85rem;
+  }
+  .logout-btn:hover { border-color:#FFD700; color:#FFD700; }
+
+  /* STATS */
+  .stats-bar {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;
+    padding:1.5rem 2rem; background:#111; border-bottom:1px solid #222;
+  }
+  .stat-card {
+    background:#1a1a1a; border:1px solid #222; border-radius:10px;
+    padding:1.2rem; text-align:center;
+  }
+  .stat-num { font-size:2rem; font-weight:900; color:#FFD700; line-height:1; }
+  .stat-label { color:#666; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; margin-top:0.3rem; }
+
+  /* FILTERS */
+  .filters {
+    padding:1rem 2rem; display:flex; gap:0.8rem; align-items:center;
+    border-bottom:1px solid #222; flex-wrap:wrap;
+  }
+  .filter-btn {
+    background:#1a1a1a; border:1px solid #333; color:#aaa;
+    padding:0.4rem 1rem; border-radius:20px; cursor:pointer; font-size:0.85rem;
+    transition:all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active { background:#FFD700; color:#111; border-color:#FFD700; font-weight:700; }
+  .search-input {
+    background:#1a1a1a; border:1px solid #333; color:#fff;
+    padding:0.4rem 1rem; border-radius:20px; font-size:0.85rem; margin-left:auto;
+    width:220px;
+  }
+  .search-input:focus { outline:none; border-color:#FFD700; }
+
+  /* TABLE */
+  .table-wrap { padding:1.5rem 2rem; overflow-x:auto; }
+
+  table { width:100%; border-collapse:collapse; }
+  thead tr { border-bottom:2px solid #FFD700; }
+  th { padding:0.8rem 1rem; text-align:left; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:#666; }
+  tbody tr { border-bottom:1px solid #1a1a1a; transition:background 0.15s; cursor:pointer; }
+  tbody tr:hover { background:#111; }
+  td { padding:0.9rem 1rem; font-size:0.9rem; }
+
+  .statut-badge {
+    padding:0.25rem 0.7rem; border-radius:20px; font-size:0.75rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.05em;
+  }
+  .statut-en_attente { background:rgba(255,215,0,0.15); color:#FFD700; border:1px solid rgba(255,215,0,0.3); }
+  .statut-confirme { background:rgba(0,200,100,0.15); color:#00c864; border:1px solid rgba(0,200,100,0.3); }
+  .statut-annule { background:rgba(255,50,50,0.15); color:#ff4444; border:1px solid rgba(255,50,50,0.3); }
+
+  .price-tag { color:#FFD700; font-weight:700; }
+
+  /* MODAL */
+  .modal-overlay {
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85);
+    z-index:1000; align-items:center; justify-content:center; padding:1rem;
+  }
+  .modal-overlay.open { display:flex; }
+  .modal {
+    background:#111; border:2px solid #FFD700; border-radius:16px;
+    padding:2rem; width:100%; max-width:600px; max-height:90vh; overflow-y:auto;
+  }
+  .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
+  .modal-title { font-size:1.2rem; font-weight:900; color:#FFD700; }
+  .modal-close { background:none; border:none; color:#666; font-size:1.5rem; cursor:pointer; }
+  .modal-close:hover { color:#fff; }
+
+  .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.5rem; }
+  .info-item label { font-size:0.7rem; color:#666; text-transform:uppercase; letter-spacing:0.1em; display:block; margin-bottom:0.2rem; }
+  .info-item span { font-size:0.95rem; color:#fff; }
+
+  .statut-select {
+    background:#1a1a1a; border:1px solid #333; color:#fff;
+    padding:0.6rem 1rem; border-radius:8px; font-size:0.9rem; width:100%;
+    margin-bottom:1rem;
+  }
+  .statut-select:focus { outline:none; border-color:#FFD700; }
+
+  .modal-actions { display:flex; gap:0.8rem; }
+  .btn-save {
+    flex:1; background:#FFD700; color:#111; border:none; padding:0.8rem;
+    font-weight:900; font-size:0.9rem; border-radius:8px; cursor:pointer;
+    text-transform:uppercase;
+  }
+  .btn-save:hover { background:#fff; }
+  .btn-cancel {
+    background:none; border:1px solid #333; color:#aaa; padding:0.8rem 1.5rem;
+    border-radius:8px; cursor:pointer; font-size:0.9rem;
+  }
+  .btn-cancel:hover { border-color:#666; color:#fff; }
+  .btn-delete {
+    background:none; border:1px solid #ff4444; color:#ff4444; padding:0.8rem 1.5rem;
+    border-radius:8px; cursor:pointer; font-size:0.9rem;
+  }
+  .btn-delete:hover { background:#ff4444; color:#fff; }
+
+  .loading { text-align:center; padding:3rem; color:#666; }
+  .empty { text-align:center; padding:3rem; color:#666; }
+
+  @media(max-width:768px) {
+    .stats-bar { grid-template-columns:repeat(2,1fr); }
+    .info-grid { grid-template-columns:1fr; }
+    th:nth-child(4), td:nth-child(4),
+    th:nth-child(5), td:nth-child(5) { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <h1>🔐 Admin</h1>
+    <p>Mini Pelle Direct — Espace réservations</p>
+    <input type="password" id="passwordInput" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')login()">
+    <button class="login-btn" onclick="login()">Accéder →</button>
+    <div class="login-error" id="loginError">Mot de passe incorrect</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+  <header>
+    <div class="logo">Mini Pelle <span>Direct</span> — Admin</div>
+    <div class="header-right">
+      <span class="badge-count" id="pending-count">0 en attente</span>
+      <button class="logout-btn" onclick="logout()">Déconnexion</button>
+    </div>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-num" id="stat-total">0</div>
+      <div class="stat-label">Total réservations</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="stat-attente" style="color:#FFD700">0</div>
+      <div class="stat-label">En attente</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="stat-confirme" style="color:#00c864">0</div>
+      <div class="stat-label">Confirmées</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="stat-ca" style="color:#FFD700">0€</div>
+      <div class="stat-label">CA potentiel</div>
+    </div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterBy('all', this)">Toutes</button>
+    <button class="filter-btn" onclick="filterBy('en_attente', this)">En attente</button>
+    <button class="filter-btn" onclick="filterBy('confirme', this)">Confirmées</button>
+    <button class="filter-btn" onclick="filterBy('annule', this)">Annulées</button>
+    <input class="search-input" type="text" placeholder="🔍 Rechercher..." oninput="searchReservations(this.value)">
+  </div>
+
+  <div class="table-wrap">
+    <div class="loading" id="loading">Chargement des réservations...</div>
+    <table id="reservations-table" style="display:none">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Client</th>
+          <th>Machine</th>
+          <th>Date</th>
+          <th>Durée</th>
+          <th>Total</th>
+          <th>Statut</th>
+        </tr>
+      </thead>
+      <tbody id="reservations-body"></tbody>
+    </table>
+    <div class="empty" id="empty" style="display:none">Aucune réservation trouvée.</div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">📋 Détails de la réservation</div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="info-grid">
+      <div class="info-item"><label>Client</label><span id="m-client"></span></div>
+      <div class="info-item"><label>Téléphone</label><span id="m-tel"></span></div>
+      <div class="info-item"><label>Email</label><span id="m-email"></span></div>
+      <div class="info-item"><label>Machine</label><span id="m-machine"></span></div>
+      <div class="info-item"><label>Durée</label><span id="m-duree"></span></div>
+      <div class="info-item"><label>Date souhaitée</label><span id="m-date"></span></div>
+      <div class="info-item"><label>Livraison</label><span id="m-livraison"></span></div>
+      <div class="info-item"><label>Total TTC</label><span id="m-total" style="color:#FFD700;font-weight:900"></span></div>
+      <div class="info-item" style="grid-column:span 2"><label>Options</label><span id="m-options"></span></div>
+      <div class="info-item" style="grid-column:span 2"><label>Adresse chantier</label><span id="m-adresse"></span></div>
+      <div class="info-item" style="grid-column:span 2"><label>Message</label><span id="m-message"></span></div>
+    </div>
+    <select class="statut-select" id="m-statut">
+      <option value="en_attente">⏳ En attente</option>
+      <option value="confirme">✅ Confirmée</option>
+      <option value="annule">❌ Annulée</option>
+    </select>
+    <div class="modal-actions">
+      <button class="btn-save" onclick="saveStatut()">💾 Enregistrer</button>
+      <a id="m-tel-link" href="#" class="btn-cancel" style="text-align:center;text-decoration:none">📞 Appeler</a>
+      <button class="btn-delete" onclick="deleteReservation()">🗑</button>
+      <button class="btn-cancel" onclick="closeModal()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://satkuswraclwyyeqympo.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhdGt1c3dyYWNsd3l5ZXF5bXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxNTQ1OTEsImV4cCI6MjA5NTczMDU5MX0.qmg4S3YpFecUJzDJcaWGk08-u4KGSxz_SIPtKKp0PdI';
+  const PASSWORD = 'minipelle2024';
+
+  let allReservations = [];
+  let currentFilter = 'all';
+  let currentId = null;
+
+  // AUTH
+  function login() {
+    const pwd = document.getElementById('passwordInput').value;
+    if (pwd === PASSWORD) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      loadReservations();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  function logout() {
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('passwordInput').value = '';
+  }
+
+  // LOAD
+  async function loadReservations() {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/reservations?order=created_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`
+        }
+      });
+      allReservations = await res.json();
+      renderTable(allReservations);
+      updateStats(allReservations);
+    } catch(e) {
+      document.getElementById('loading').textContent = 'Erreur de chargement.';
+    }
+  }
+
+  // STATS
+  function updateStats(data) {
+    const total = data.length;
+    const attente = data.filter(r => r.statut === 'en_attente').length;
+    const confirme = data.filter(r => r.statut === 'confirme').length;
+    const ca = data.filter(r => r.statut !== 'annule')
+      .reduce((sum, r) => sum + (parseInt(r.total) || 0), 0);
+
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('stat-attente').textContent = attente;
+    document.getElementById('stat-confirme').textContent = confirme;
+    document.getElementById('stat-ca').textContent = ca + '€';
+    document.getElementById('pending-count').textContent = attente + ' en attente';
+  }
+
+  // RENDER
+  function renderTable(data) {
+    document.getElementById('loading').style.display = 'none';
+    const tbody = document.getElementById('reservations-body');
+
+    if (data.length === 0) {
+      document.getElementById('reservations-table').style.display = 'none';
+      document.getElementById('empty').style.display = 'block';
+      return;
+    }
+
+    document.getElementById('reservations-table').style.display = 'table';
+    document.getElementById('empty').style.display = 'none';
+
+    tbody.innerHTML = data.map(r => `
+      <tr onclick="openModal(${r.id})">
+        <td style="color:#555">#${r.id}</td>
+        <td><strong>${r.prenom} ${r.nom}</strong><br><small style="color:#666">${r.tel}</small></td>
+        <td>${r.machine || '—'}</td>
+        <td>${r.date_souhaitee || '—'}</td>
+        <td>${r.duree || '—'}</td>
+        <td class="price-tag">${r.total || '—'}</td>
+        <td><span class="statut-badge statut-${r.statut}">${formatStatut(r.statut)}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  function formatStatut(s) {
+    return { en_attente: '⏳ En attente', confirme: '✅ Confirmée', annule: '❌ Annulée' }[s] || s;
+  }
+
+  // FILTER
+  function filterBy(filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filtered = filter === 'all' ? allReservations : allReservations.filter(r => r.statut === filter);
+    renderTable(filtered);
+  }
+
+  function searchReservations(query) {
+    const q = query.toLowerCase();
+    const filtered = allReservations.filter(r =>
+      (r.prenom + ' ' + r.nom + ' ' + r.tel + ' ' + r.email + ' ' + r.machine).toLowerCase().includes(q)
+    );
+    renderTable(filtered);
+  }
+
+  // MODAL
+  function openModal(id) {
+    const r = allReservations.find(x => x.id === id);
+    if (!r) return;
+    currentId = id;
+    document.getElementById('m-client').textContent = r.prenom + ' ' + r.nom;
+    document.getElementById('m-tel').textContent = r.tel || '—';
+    document.getElementById('m-email').textContent = r.email || '—';
+    document.getElementById('m-machine').textContent = r.machine || '—';
+    document.getElementById('m-duree').textContent = r.duree || '—';
+    document.getElementById('m-date').textContent = r.date_souhaitee || '—';
+    document.getElementById('m-livraison').textContent = r.livraison || '—';
+    document.getElementById('m-total').textContent = r.total || '—';
+    document.getElementById('m-options').textContent = r.options || 'Aucune';
+    document.getElementById('m-adresse').textContent = r.adresse || '—';
+    document.getElementById('m-message').textContent = r.message || '—';
+    document.getElementById('m-statut').value = r.statut;
+    document.getElementById('m-tel-link').href = 'tel:' + (r.tel || '');
+    document.getElementById('modal').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    currentId = null;
+  }
+
+  // SAVE STATUT
+  async function saveStatut() {
+    const statut = document.getElementById('m-statut').value;
+    await fetch(`${SUPABASE_URL}/rest/v1/reservations?id=eq.${currentId}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ statut })
+    });
+    closeModal();
+    loadReservations();
+  }
+
+  // DELETE
+  async function deleteReservation() {
+    if (!confirm('Supprimer cette réservation ?')) return;
+    await fetch(`${SUPABASE_URL}/rest/v1/reservations?id=eq.${currentId}`, {
+      method: 'DELETE',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`
+      }
+    });
+    closeModal();
+    loadReservations();
+  }
+</script>
+</body>
+</html>

@@ -100,7 +100,7 @@
         .machine-btn { display:block; background:linear-gradient(90deg,#FFD700,#ffa500); color:#111; text-align:center; padding:0.8rem; border-radius:8px; font-weight:800; text-decoration:none; }
 
         /* SERVICES */
-        .services-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; }
+        .services-grid { display:grid; grid-template-columns:repeat(6, 1fr); gap:0.8rem; overflow-x:auto; }
         .service-card { background:#111; border-radius:12px; padding:1.5rem; text-align:center; border:1px solid rgba(255,215,0,0.2); }
         .service-icon { font-size:2.5rem; margin-bottom:0.8rem; }
         .service-title { color:#FFD700; font-weight:700; font-size:1rem; margin-bottom:0.4rem; }
@@ -142,6 +142,7 @@
                 <button onclick="document.getElementById('nav-menu').classList.toggle('open')">☰</button>
                 <ul id="nav-menu">
                     <li><a href="/catalogue.html">🚜 Notre Catalogue</a></li>
+                    <li><a href="/galerie.html">📸 Galerie</a></li>
                     <li><a href="/tarifs.html">💰 Tarifs</a></li>
                     <li><a href="/promo.html">🎁 Pack Promo 1T5</a></li>
                     <li><a href="/location.html">📅 Location</a></li>
@@ -370,5 +371,35 @@ document.addEventListener("click", function(e) {
     if (!e.target.closest("nav")) document.getElementById("nav-menu").classList.remove("open");
 });
 </script>
+
+<!-- Bouton téléphone fixe mobile -->
+<div id="mobile-cta" style="
+  display:none;
+  position:fixed;
+  bottom:0; left:0; right:0;
+  z-index:9999;
+  background:#FFD700;
+  padding:14px 20px;
+  text-align:center;
+  box-shadow:0 -3px 15px rgba(0,0,0,0.3);
+">
+  <a href="tel:0699168777" style="
+    color:#111;
+    font-weight:900;
+    font-size:1.1rem;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  ">📞 Appeler — 06 99 16 87 77</a>
+</div>
+<script>
+  if(window.innerWidth <= 768) document.getElementById('mobile-cta').style.display='block';
+  window.addEventListener('resize', function(){
+    document.getElementById('mobile-cta').style.display = window.innerWidth <= 768 ? 'block' : 'none';
+  });
+</script>
+
 </body>
 </html>
