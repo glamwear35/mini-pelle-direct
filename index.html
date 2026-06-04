@@ -463,6 +463,54 @@
 <!-- FOOTER -->
 
   
+
+<!-- Compteur de confiance -->
+<section style="background:#FFD700;padding:30px 20px;">
+  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;">
+    <div>
+      <div id="cnt-locations" style="font-size:2.2rem;font-weight:900;color:#111;">0</div>
+      <div style="font-size:.85rem;color:#333;font-weight:600;">Locations réalisées</div>
+    </div>
+    <div>
+      <div id="cnt-avis" style="font-size:2.2rem;font-weight:900;color:#111;">0</div>
+      <div style="font-size:.85rem;color:#333;font-weight:600;">Avis Google ⭐ 4,9/5</div>
+    </div>
+    <div>
+      <div id="cnt-km" style="font-size:2.2rem;font-weight:900;color:#111;">0</div>
+      <div style="font-size:.85rem;color:#333;font-weight:600;">Km de zone couverte</div>
+    </div>
+    <div>
+      <div id="cnt-ans" style="font-size:2.2rem;font-weight:900;color:#111;">0</div>
+      <div style="font-size:.85rem;color:#333;font-weight:600;">Ans d'expérience</div>
+    </div>
+  </div>
+</section>
+<script>
+function animCount(id, target, suffix) {
+  const el = document.getElementById(id);
+  let current = 0;
+  const step = Math.ceil(target / 60);
+  const timer = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = current + (suffix || '');
+    if (current >= target) clearInterval(timer);
+  }, 25);
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animCount('cnt-locations', 150, '+');
+      animCount('cnt-avis', 13, '');
+      animCount('cnt-km', 30, 'km');
+      animCount('cnt-ans', 2, ' ans');
+      observer.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+const section = document.querySelector('#cnt-locations');
+if (section) observer.observe(section.closest('section'));
+</script>
+
 <!-- Tableau prix rapide -->
 <section style="background:#111;padding:40px 20px;">
   <div style="max-width:900px;margin:0 auto;">
@@ -523,6 +571,87 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+
+<!-- Section avis Google -->
+
+<!-- Bannière vente pack -->
+<section style="background:linear-gradient(135deg,#0a0a0a,#1a0500);padding:50px 20px;border-top:3px solid #FFD700;">
+  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;">
+    <div>
+      <div style="background:#FFD700;color:#111;font-weight:900;font-size:.8rem;padding:4px 14px;border-radius:20px;display:inline-block;margin-bottom:16px;text-transform:uppercase;letter-spacing:.05em;">🎁 Offre limitée</div>
+      <h2 style="color:#fff;font-size:1.8rem;font-weight:900;margin-bottom:12px;line-height:1.2;">Pack Complet<br><span style="color:#FFD700;">Mini Pelle 1T5</span></h2>
+      <ul style="list-style:none;margin-bottom:24px;">
+        <li style="color:#aaa;font-size:.9rem;margin-bottom:8px;">✅ Mini Pelle Kubota D902 1T5 — neuve</li>
+        <li style="color:#aaa;font-size:.9rem;margin-bottom:8px;">✅ Remorque double essieux 2000kg</li>
+        <li style="color:#aaa;font-size:.9rem;margin-bottom:8px;">✅ 6 accessoires inclus (godets, BRH, tarière...)</li>
+        <li style="color:#aaa;font-size:.9rem;margin-bottom:8px;">✅ Garantie 1 an — Livraison incluse Bretagne</li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <a href="/promo.html" style="background:#FFD700;color:#111;font-weight:900;padding:14px 24px;border-radius:8px;text-decoration:none;font-size:1rem;">Voir le pack →</a>
+        <a href="tel:0699168777" style="color:#FFD700;font-weight:700;text-decoration:none;font-size:.95rem;">📞 06 99 16 87 77</a>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <img src="/mini-pelle-1t.jpg" alt="Pack Mini Pelle 1T5 Kubota" style="max-width:100%;height:250px;object-fit:contain;filter:drop-shadow(0 10px 30px rgba(255,180,0,0.4));" loading="lazy" />
+      <div style="background:#FFD700;color:#111;border-radius:10px;padding:16px;margin-top:16px;">
+        <div style="font-size:2rem;font-weight:900;">19 990€ TTC</div>
+        <div style="font-size:.85rem;font-weight:600;">Pack complet — Prix tout inclus</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff;padding:50px 20px;">
+  <div style="max-width:900px;margin:0 auto;">
+    <h2 style="font-size:1.4rem;font-weight:900;text-align:center;margin-bottom:6px;">⭐ Ce que disent nos clients</h2>
+    <p style="text-align:center;color:#888;font-size:.9rem;margin-bottom:30px;">13 avis Google — Note moyenne 4,9/5</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:30px;">
+
+      <div style="background:#f9f9f9;border-radius:12px;padding:20px;border-left:4px solid #FFD700;">
+        <div style="color:#FFD700;font-size:1rem;margin-bottom:6px;">⭐⭐⭐⭐⭐</div>
+        <p style="font-size:.9rem;color:#333;line-height:1.6;font-style:italic;margin-bottom:10px;">"Nickel ! Alex m'a conseillé la bonne machine et livré le lendemain. Franchement top, je recommande sans hésiter."</p>
+        <div style="font-weight:700;font-size:.85rem;">Jean-Marc T.</div>
+        <div style="font-size:.78rem;color:#888;">Particulier — Terrassement jardin</div>
+      </div>
+
+      <div style="background:#f9f9f9;border-radius:12px;padding:20px;border-left:4px solid #FFD700;">
+        <div style="color:#FFD700;font-size:1rem;margin-bottom:6px;">⭐⭐⭐⭐⭐</div>
+        <p style="font-size:.9rem;color:#333;line-height:1.6;font-style:italic;margin-bottom:10px;">"Machine dispo, propre et efficace. Le gars est sympa et réactif. Je reviendrai c'est sûr !"</p>
+        <div style="font-weight:700;font-size:.85rem;">Kevin B.</div>
+        <div style="font-size:.78rem;color:#888;">Particulier — Tranchée réseau</div>
+      </div>
+
+      <div style="background:#f9f9f9;border-radius:12px;padding:20px;border-left:4px solid #FFD700;">
+        <div style="color:#FFD700;font-size:1rem;margin-bottom:6px;">⭐⭐⭐⭐⭐</div>
+        <p style="font-size:.9rem;color:#333;line-height:1.6;font-style:italic;margin-bottom:10px;">"En tant qu'artisan paysagiste, j'ai besoin de matériel fiable. Je fais appel à eux régulièrement, jamais déçu."</p>
+        <div style="font-weight:700;font-size:.85rem;">Patrick F.</div>
+        <div style="font-size:.78rem;color:#888;">Professionnel — Paysagiste</div>
+      </div>
+
+      <div style="background:#f9f9f9;border-radius:12px;padding:20px;border-left:4px solid #FFD700;">
+        <div style="color:#FFD700;font-size:1rem;margin-bottom:6px;">⭐⭐⭐⭐⭐</div>
+        <p style="font-size:.9rem;color:#333;line-height:1.6;font-style:italic;margin-bottom:10px;">"Très bon contact, machine en parfait état. La livraison a été rapide et le matériel opérationnel dès le départ."</p>
+        <div style="font-weight:700;font-size:.85rem;">Stéphane M.</div>
+        <div style="font-size:.78rem;color:#888;">Particulier — Assainissement</div>
+      </div>
+
+      <div style="background:#f9f9f9;border-radius:12px;padding:20px;border-left:4px solid #FFD700;">
+        <div style="color:#FFD700;font-size:1rem;margin-bottom:6px;">⭐⭐⭐⭐⭐</div>
+        <p style="font-size:.9rem;color:#333;line-height:1.6;font-style:italic;margin-bottom:10px;">"Parfait pour mon chantier de démolition. Prix correct, machine fiable et Alex très disponible au téléphone."</p>
+        <div style="font-weight:700;font-size:.85rem;">Thomas R.</div>
+        <div style="font-size:.78rem;color:#888;">Professionnel — Démolition</div>
+      </div>
+
+      <div style="background:#FFD700;border-radius:12px;padding:20px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
+        <div style="font-size:2rem;font-weight:900;color:#111;">4,9 ⭐</div>
+        <div style="font-size:.9rem;font-weight:700;color:#111;">13 avis Google vérifiés</div>
+        <a href="https://g.page/r/CUyjIPn-P8NVEAE/review" target="_blank" style="background:#111;color:#FFD700;font-weight:800;padding:10px 18px;border-radius:8px;text-decoration:none;font-size:.88rem;">⭐ Laisser un avis</a>
+      </div>
+
+    </div>
   </div>
 </section>
 
