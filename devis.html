@@ -191,13 +191,6 @@
   <p>Configurez votre devis en ligne — réponse sous 24h</p>
 </section>
 
-<!-- Bandeau confiance devis -->
-<div style="background:#111;border-bottom:2px solid #FFD700;padding:12px 20px;text-align:center;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;">
-  <span style="color:#aaa;font-size:.9rem;">⏱️ <strong style="color:#FFD700;">Réponse sous 24h</strong> — Sans engagement</span>
-  <span style="color:#aaa;font-size:.9rem;">📞 Une question ? <a href="tel:0699168777" style="color:#FFD700;font-weight:800;text-decoration:none;">06 99 16 87 77</a></span>
-  <span style="color:#aaa;font-size:.9rem;">✅ Devis 100% gratuit</span>
-</div>
-
 <div class="wrap">
 
   <!-- ÉTAPE 1 — Machine -->
@@ -483,7 +476,7 @@
         'Message : ' + (msg || 'Aucun')
     })
     .then(() => {
-      formMsg.innerHTML = \'✅ <strong>Demande envoyée !</strong> Nous vous contactons sous 24h pour confirmer votre réservation.<br><span style="font-size:.88rem;opacity:.8;">📞 Besoin urgent ? Appelez le <a href=\"tel:0699168777\" style=\"color:#155724;font-weight:700;\">06 99 16 87 77</a></span>\';
+      formMsg.textContent = '✅ Demande envoyée ! Nous vous contactons sous 24h.';
       formMsg.className = 'form-msg success';
       btn.textContent = '📩 Envoyer ma demande de devis';
       btn.disabled = false;
