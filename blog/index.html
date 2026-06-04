@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Blog Mini Pelle Direct — Guides pratiques, conseils et tarifs pour vos travaux de terrassement en Bretagne." />
+  <title>Blog — Guides & Conseils Mini Pelle Direct</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --yellow: #FFD700; --black: #111; --gray: #f5f5f5; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #fff; color: #333; }
+    header { background: var(--black); padding: 0 20px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    header a.logo img { height: 44px; }
+    header a.tel { color: var(--yellow); font-weight: 700; text-decoration: none; font-size: 1rem; }
+    nav { display: flex; gap: 6px; flex-wrap: wrap; }
+    nav a { color: #fff; text-decoration: none; font-size: .85rem; padding: 6px 10px; border-radius: 4px; transition: background .2s; }
+    nav a:hover, nav a.active { background: var(--yellow); color: var(--black); font-weight: 700; }
+    .hero { background: var(--black); color: #fff; text-align: center; padding: 60px 20px 50px; border-bottom: 3px solid var(--yellow); }
+    .hero h1 { font-size: 2rem; font-weight: 900; margin-bottom: 10px; }
+    .hero h1 span { color: var(--yellow); }
+    .hero p { opacity: .75; font-size: 1rem; }
+    .wrap { max-width: 900px; margin: 50px auto; padding: 0 20px 80px; }
+    .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    .article-card { border: 2px solid #e0e0e0; border-radius: 12px; padding: 24px; text-decoration: none; color: var(--black); transition: border-color .2s, transform .15s; display: block; }
+    .article-card:hover { border-color: var(--yellow); transform: translateY(-3px); }
+    .article-card .tag { display: inline-block; background: var(--yellow); color: var(--black); font-weight: 800; font-size: .75rem; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .article-card h2 { font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; line-height: 1.4; }
+    .article-card p { font-size: .88rem; color: #666; line-height: 1.6; }
+    .article-card .lire { display: inline-block; margin-top: 14px; color: #b8960e; font-weight: 700; font-size: .88rem; }
+    footer { background: var(--black); color: #aaa; text-align: center; padding: 30px 20px; font-size: .9rem; }
+    footer a { color: var(--yellow); text-decoration: none; }
+    .footer-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+    .footer-links a { color: #ccc; font-size: .85rem; }
+    .footer-links a:hover { color: var(--yellow); }
+  </style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/"><img src="/logo mini pelle direct.png" alt="Mini Pelle Direct" /></a>
+  <a class="tel" href="tel:0699168777">📞 06 99 16 87 77</a>
+  <nav>
+    <a href="/catalogue.html">🚜 Catalogue</a>
+    <a href="/tarifs.html">💰 Tarifs</a>
+    <a href="/promo.html">🎁 Promo</a>
+    <a href="/location.html">📅 Location</a>
+    <a href="/blog/" class="active">📝 Blog</a>
+    <a href="/contact.html">📧 Contact</a>
+    <a href="/faq.html">❓ FAQ</a>
+  </nav>
+</header>
+<section class="hero">
+  <h1>📝 <span>Blog & Guides</span></h1>
+  <p>Conseils pratiques pour vos travaux de terrassement en Bretagne</p>
+</section>
+<div class="wrap">
+  <div class="articles-grid">
+    <a href="/blog/choisir-mini-pelle.html" class="article-card">
+      <span class="tag">Guide</span>
+      <h2>Comment choisir sa mini pelle ? 800kg vs 1T5</h2>
+      <p>Comparez les deux machines et trouvez celle qui correspond à votre chantier.</p>
+      <span class="lire">Lire l'article →</span>
+    </a>
+    <a href="/blog/cout-terrassement-bretagne.html" class="article-card">
+      <span class="tag">Prix</span>
+      <h2>Combien coûte un terrassement en Bretagne ?</h2>
+      <p>Location vs prestataire : guide des prix pour bien budgéter votre chantier.</p>
+      <span class="lire">Lire l'article →</span>
+    </a>
+    <a href="/blog/preparer-chantier-mini-pelle.html" class="article-card">
+      <span class="tag">Sécurité</span>
+      <h2>Préparer son chantier avant la livraison</h2>
+      <p>Checklist complète pour démarrer votre chantier en toute sécurité.</p>
+      <span class="lire">Lire l'article →</span>
+    </a>
+    <a href="/blog/mini-pelle-particulier.html" class="article-card">
+      <span class="tag">Particulier</span>
+      <h2>Mini pelle pour particulier : tout ce qu'il faut savoir</h2>
+      <p>Permis, assurance, prix — tout pour réussir votre premier chantier.</p>
+      <span class="lire">Lire l'article →</span>
+    </a>
+    <a href="/blog/mini-pelle-assainissement-tranchee.html" class="article-card">
+      <span class="tag">Technique</span>
+      <h2>Mini pelle pour assainissement et tranchée</h2>
+      <p>Guide pratique pour les travaux de réseaux et assainissement non collectif.</p>
+      <span class="lire">Lire l'article →</span>
+    </a>
+  </div>
+</div>
+<footer>
+  <div class="footer-links">
+    <a href="/catalogue.html">Catalogue</a>
+    <a href="/tarifs.html">Tarifs</a>
+    <a href="/promo.html">Pack Promo</a>
+    <a href="/blog/">Blog</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <p>📍 Bain-de-Bretagne (35) — <a href="tel:0699168777">06 99 16 87 77</a></p>
+  <p style="margin-top:8px">© 2026 Mini Pelle Direct — Tous droits réservés</p>
+</footer>
+</body>
+</html>
