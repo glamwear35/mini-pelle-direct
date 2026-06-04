@@ -93,12 +93,32 @@
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <a href="/index.html" class="logo">Mini Pelles Direct</a>
-            <img src="/logo%20mini%20pelle%20direct.png" alt="Logo Mini Pelles Direct" style="height:45px; object-fit:contain;">
-        </div>
-    </header>
+    <header style="background:#111;padding:0 20px;position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;height:64px;">
+  <a href="/" style="display:flex;align-items:center;"><img src="/logo mini pelle direct.png" alt="Mini Pelle Direct" style="height:44px;" /></a>
+  <a href="tel:0699168777" style="color:#FFD700;font-weight:700;text-decoration:none;font-size:1rem;">📞 06 99 16 87 77</a>
+  <button onclick="document.getElementById('promoNav').classList.toggle('open');this.classList.toggle('open')" style="display:none;background:none;border:none;cursor:pointer;padding:8px;" id="promoToggle">
+    <span style="display:block;width:24px;height:2px;background:#fff;margin:5px 0;"></span>
+    <span style="display:block;width:24px;height:2px;background:#fff;margin:5px 0;"></span>
+    <span style="display:block;width:24px;height:2px;background:#fff;margin:5px 0;"></span>
+  </button>
+  <nav id="promoNav" style="display:flex;gap:6px;flex-wrap:wrap;">
+    <a href="/catalogue.html" style="color:#fff;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;" onmouseover="this.style.background='#FFD700';this.style.color='#111'" onmouseout="this.style.background='';this.style.color='#fff'">🚜 Catalogue</a>
+    <a href="/tarifs.html" style="color:#fff;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;" onmouseover="this.style.background='#FFD700';this.style.color='#111'" onmouseout="this.style.background='';this.style.color='#fff'">💰 Tarifs</a>
+    <a href="/promo.html" style="color:#111;background:#FFD700;font-weight:700;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;">🎁 Promo</a>
+    <a href="/location.html" style="color:#fff;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;" onmouseover="this.style.background='#FFD700';this.style.color='#111'" onmouseout="this.style.background='';this.style.color='#fff'">📅 Location</a>
+    <a href="/blog/" style="color:#fff;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;" onmouseover="this.style.background='#FFD700';this.style.color='#111'" onmouseout="this.style.background='';this.style.color='#fff'">📝 Blog</a>
+    <a href="/contact.html" style="color:#fff;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;" onmouseover="this.style.background='#FFD700';this.style.color='#111'" onmouseout="this.style.background='';this.style.color='#fff'">📧 Contact</a>
+    <a href="/faq.html" style="color:#fff;font-size:.85rem;padding:6px 10px;border-radius:4px;text-decoration:none;" onmouseover="this.style.background='#FFD700';this.style.color='#111'" onmouseout="this.style.background='';this.style.color='#fff'">❓ FAQ</a>
+  </nav>
+</header>
+<style>
+  @media(max-width:768px) {
+    #promoToggle { display:block !important; }
+    #promoNav { display:none !important; flex-direction:column; gap:0; position:absolute; top:64px; left:0; right:0; background:#111; padding:10px 0; z-index:99; border-top:2px solid #FFD700; }
+    #promoNav.open { display:flex !important; }
+    #promoNav a { padding:12px 20px !important; border-radius:0 !important; border-bottom:1px solid #222; }
+  }
+</style>
 
     <div class="hero">
         <div class="hero-badge">⚡ OFFRE LIMITÉE</div>
@@ -114,12 +134,12 @@
     <div class="container">
 
         <div class="section">
-            <h2>🚜 Mini Pelle Kubota D901 — 1,5 tonne</h2>
+            <h2>🚜 Mini Pelle Kubota D902 — 1,5 tonne</h2>
             <div class="machine-grid">
                 <div>
                     <span class="tag">Machine principale</span>
                     <ul class="spec-list">
-                        <li><span class="label">Moteur</span><span class="value">Kubota D901</span></li>
+                        <li><span class="label">Moteur</span><span class="value">Kubota D902</span></li>
                         <li><span class="label">Poids</span><span class="value">1,5 tonne</span></li>
                         <li><span class="label">Puissance</span><span class="value">Diesel 3 cylindres</span></li>
                         <li><span class="label">Chenilles</span><span class="value">Télescopiques</span></li>
@@ -214,7 +234,7 @@
                 <div class="point-card">
                     <div class="point-icon">🛡️</div>
                     <div class="point-title">Matériel fiable</div>
-                    <div class="point-sub">Moteur Kubota D901 reconnu</div>
+                    <div class="point-sub">Moteur Kubota D902 reconnu</div>
                 </div>
                 <div class="point-card">
                     <div class="point-icon">🔩</div>
@@ -232,7 +252,7 @@
         <div class="recap">
             <h2>🏷️ Ce que vous obtenez pour 19 990 € TTC</h2>
             <div class="recap-items">
-                <span class="recap-item">✅ Mini Pelle Kubota D901 1T5</span>
+                <span class="recap-item">✅ Mini Pelle Kubota D902 1T5</span>
                 <span class="recap-item">✅ Remorque double essieux 2000kg</span>
                 <span class="recap-item">✅ Godet 200mm</span>
                 <span class="recap-item">✅ Godet 400mm</span>
