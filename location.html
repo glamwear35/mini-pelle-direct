@@ -337,6 +337,7 @@
   }
 
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -423,19 +424,19 @@
       <div class="step-title">Options & accessoires</div>
     </div>
     <label class="option-item">
-      <input type="checkbox" onchange="updateTotal()" data-price="25" data-label="Godet 200mm"> 
+      <input type="checkbox" onchange="updateTotal()" data-price="0" data-label="Godet 200mm"> 
       <span class="option-label">🪣 Godet 200mm (tranchée)</span>
-      <span class="option-price">+25€</span>
+      <span class="option-price" style="color:#4CAF50;font-weight:700">Inclus</span>
     </label>
     <label class="option-item">
-      <input type="checkbox" onchange="updateTotal()" data-price="25" data-label="Godet 400mm">
+      <input type="checkbox" onchange="updateTotal()" data-price="0" data-label="Godet 400mm">
       <span class="option-label">🪣 Godet 400mm (terrassement)</span>
-      <span class="option-price">+25€</span>
+      <span class="option-price" style="color:#4CAF50;font-weight:700">Inclus</span>
     </label>
     <label class="option-item">
-      <input type="checkbox" onchange="updateTotal()" data-price="25" data-label="Godet 600mm">
+      <input type="checkbox" onchange="updateTotal()" data-price="0" data-label="Godet 600mm">
       <span class="option-label">🪣 Godet 600mm (curage)</span>
-      <span class="option-price">+25€</span>
+      <span class="option-price" style="color:#4CAF50;font-weight:700">Inclus</span>
     </label>
     <label class="option-item">
       <input type="checkbox" onchange="updateTotal()" data-price="35" data-label="Tarière">
@@ -448,9 +449,14 @@
       <span class="option-price">+45€</span>
     </label>
     <label class="option-item">
-      <input type="checkbox" onchange="updateTotal()" data-price="20" data-label="Attache rapide">
+      <input type="checkbox" onchange="updateTotal()" data-price="40" data-label="Remorque double essieux">
+      <span class="option-label">🚛 Remorque double essieux (2000 kg)</span>
+      <span class="option-price">+40€</span>
+    </label>
+    <label class="option-item">
+      <input type="checkbox" onchange="updateTotal()" data-price="0" data-label="Attache rapide">
       <span class="option-label">⚡ Attache rapide</span>
-      <span class="option-price">+20€</span>
+      <span class="option-price" style="color:#4CAF50;font-weight:700">Inclus</span>
     </label>
   </div>
 
@@ -465,10 +471,10 @@
       <span class="option-label">🚶 Sans livraison (retrait sur place)</span>
       <span class="option-price">0€</span>
     </label>
-    <label class="livraison-item" onclick="selectLivraison(this, 'Livraison 0–30 km', 69)">
+    <label class="livraison-item" onclick="selectLivraison(this, 'Livraison 0–30 km', 90)">
       <input type="radio" name="livraison">
       <span class="option-label">🚚 Livraison 0–30 km</span>
-      <span class="option-price">+69€</span>
+      <span class="option-price">+90€</span>
     </label>
     <label class="livraison-item" onclick="selectLivraison(this, 'Livraison +30 km', 0)">
       <input type="radio" name="livraison">
@@ -547,6 +553,13 @@
 
 </div>
 
+
+<!-- Badge entreprise vérifiée -->
+<div style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e0e0e0;border-radius:8px;padding:8px 14px;font-family:Arial,sans-serif;font-size:13px;color:#333;margin:10px auto;max-width:fit-content;">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#4CAF50"/><path d="M7 12.5l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <span><strong style="color:#111">Entreprise vérifiée</strong> &mdash; SIRET 52224467200039</span>
+</div>
+<!-- Fin badge -->
 <footer>
   <span>Mini Pelle Direct — Bain-de-Bretagne</span>
   <span>📞 06 99 16 87 77</span>
@@ -705,9 +718,50 @@
     const opts = Array.from(document.querySelectorAll('.option-item input:checked'))
       .map(cb => cb.dataset.label).join(', ') || 'Aucune';
 
-    const body = `Nouvelle demande de location:\n\nMachine: ${state.machine}\nDurée: ${state.dureeLabel}\nDate: ${state.date ? document.getElementById('selected-date').textContent : 'Non précisée'}\nOptions: ${opts}\nLivraison: ${state.livraisonLabel}\nTotal TTC: ${document.getElementById('r-total').textContent}\n\nContact:\nNom: ${prenom} ${nom}\nTél: ${tel}\nEmail: ${email}\nAdresse: ${document.getElementById('adresse').value}\nMessage: ${document.getElementById('message').value}`;
+    const dateStr = state.date ? document.getElementById('selected-date').textContent : 'Non précisée';
+    const adresse = document.getElementById('adresse').value;
+    const message = document.getElementById('message').value;
+    const totalStr = document.getElementById('r-total').textContent;
 
-    window.location.href = `mailto:contact@mini-pelle-direct.com?subject=Demande de location - ${state.machine}&body=${encodeURIComponent(body)}`;
+    const SUPABASE_URL = 'https://satkuswraclwyyeqympo.supabase.co';
+    const SUPABASE_ANON_KEY = 'TA_CLE_ANON_ICI';
+
+    fetch(`${SUPABASE_URL}/rest/v1/reservations`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        prenom, nom, email, tel,
+        adresse: adresse || null,
+        machine: state.machine,
+        duree: state.dureeLabel,
+        options: opts,
+        livraison: state.livraisonLabel,
+        date_souhaitee: dateStr,
+        message: message || null
+      })
+    }).catch(err => console.error('Erreur Supabase insert:', err));
+
+    emailjs.init('DacAC6gXgD340-WQX');
+    emailjs.send('service_minipelle', 'template_brnmm8m', {
+      from_name:  prenom + ' ' + nom,
+      from_email: email,
+      phone:      tel,
+      sujet:      'Demande de location — ' + state.machine,
+      message:
+        'Machine : ' + state.machine + '\\n' +
+        'Durée : ' + state.dureeLabel + '\\n' +
+        'Options : ' + opts + '\\n' +
+        'Livraison : ' + state.livraisonLabel + '\\n' +
+        'Total estimé : ' + totalStr + '\\n' +
+        'Date souhaitée : ' + dateStr + '\\n' +
+        'Adresse chantier : ' + (adresse || 'Non précisée') + '\\n\\n' +
+        'Message : ' + (message || 'Aucun')
+    }).catch(err => console.error('Erreur EmailJS:', err));
 
     document.getElementById('success').style.display = 'block';
     document.getElementById('success').scrollIntoView({behavior:'smooth'});
@@ -746,29 +800,7 @@
 
 
 <!-- Bouton WhatsApp flottant -->
-<a href="https://wa.me/33699168777?text=Bonjour%2C%20je%20souhaite%20un%20renseignement%20sur%20la%20location%20de%20mini%20pelle." 
-   target="_blank"
-   style="
-     position:fixed;
-     bottom:80px;
-     right:20px;
-     z-index:9998;
-     background:#25D366;
-     color:#fff;
-     width:56px;
-     height:56px;
-     border-radius:50%;
-     display:flex;
-     align-items:center;
-     justify-content:center;
-     font-size:1.6rem;
-     box-shadow:0 4px 15px rgba(0,0,0,0.25);
-     text-decoration:none;
-     transition:transform .2s;
-   "
-   onmouseover="this.style.transform='scale(1.1)'"
-   onmouseout="this.style.transform='scale(1)'"
-   title="Nous contacter sur WhatsApp">💬</a>
+
 
 
 <script>
@@ -787,5 +819,11 @@
   });
 </script>
 
+
+  <!-- chatbot-mpd -->
+  <script src="/chatbot-mpd.js"></script>
+
+  <!-- exit-popup -->
+  <script src="/exit-popup.js"></script>
 </body>
 </html>
