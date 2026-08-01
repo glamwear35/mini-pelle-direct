@@ -77,6 +77,8 @@
     }
     .acc-card:hover { border-color: var(--yellow); }
     .acc-card.selected { border-color: var(--yellow); background: #fffbe6; font-weight: 700; }
+    .acc-price { display:none; margin-left:6px; color:#888; font-size:.85rem; }
+    .acc-card.selected .acc-price { display:inline; color:#FFD700; font-weight:900; }
 
     /* Livraison */
     .livraison-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
@@ -236,8 +238,8 @@
       <div class="acc-card" onclick="toggleAcc(this)">🪣 Godet standard</div>
       <div class="acc-card" onclick="toggleAcc(this)">🪣 Godet curage</div>
       <div class="acc-card" onclick="toggleAcc(this)">🪣 Godet tranchée</div>
-      <div class="acc-card" onclick="toggleAcc(this)">💥 BRH (brise-roche)</div>
-      <div class="acc-card" onclick="toggleAcc(this)">🌀 Tarière</div>
+      <div class="acc-card" onclick="toggleAcc(this)" data-price="45">💥 BRH (brise-roche)<span class="acc-price">+45€</span></div>
+      <div class="acc-card" onclick="toggleAcc(this)" data-price="35">🌀 Tarière<span class="acc-price">+35€</span></div>
       <div class="acc-card" onclick="toggleAcc(this)">🔗 Attache rapide</div>
     </div>
   </div>
@@ -252,7 +254,7 @@
       </div>
       <div class="livraison-card" id="l-proche" onclick="selectLivraison('proche', null)">
         <strong>Livraison 0–30 km</strong>
-        <div class="prix" id="prix-livraison-proche">69€</div>
+        <div class="prix" id="prix-livraison-proche">90€</div>
       </div>
       <div class="livraison-card" id="l-loin" onclick="selectLivraison('loin', 0)">
         <strong>Livraison +30 km</strong>
@@ -319,6 +321,13 @@
 
 </div>
 
+
+<!-- Badge entreprise vérifiée -->
+<div style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e0e0e0;border-radius:8px;padding:8px 14px;font-family:Arial,sans-serif;font-size:13px;color:#333;margin:10px auto;max-width:fit-content;">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#4CAF50"/><path d="M7 12.5l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <span><strong style="color:#111">Entreprise vérifiée</strong> &mdash; SIRET 52224467200039</span>
+</div>
+<!-- Fin badge -->
 <footer>
   <div class="footer-links">
     <a href="/catalogue.html">Catalogue</a>
@@ -344,7 +353,7 @@
     '800':  { jour: 130, weekend: 250, semaine: 450 },
     '1500': { jour: 160, weekend: 300, semaine: 600 }
   };
-  const livraisonTarifs = { '800': 69, '1500': 89 };
+  const livraisonTarifs = { '800': 90, '1500': 90 };
 
   let machine = '800', duree = 'jour', livraison = 'sans', livraisonPrix = 0;
   let selectedDate = null;
@@ -355,7 +364,7 @@
 
   function updatePrix() {
     const base = tarifs[machine][duree];
-    const total = base + livraisonPrix;
+    let accTotal = 0; document.querySelectorAll('.acc-card.selected[data-price]').forEach(el => accTotal += parseInt(el.dataset.price)); const total = base + livraisonPrix + accTotal;
     document.getElementById('total-prix').textContent = livraisonPrix > 0 ? total + '€' : (livraison === 'loin' ? base + '€ + livraison sur devis' : base + '€');
     ['jour','weekend','semaine'].forEach(d => {
       document.getElementById('p-' + d).textContent = tarifs[machine][d] + '€';
@@ -378,7 +387,7 @@
     updatePrix();
   }
 
-  function toggleAcc(el) { el.classList.toggle('selected'); }
+  function toggleAcc(el) { el.classList.toggle('selected'); updateTotal(); }
 
   function selectLivraison(type, prix) {
     livraison = type;
@@ -460,11 +469,36 @@
 
     btn.disabled = true; btn.textContent = '⏳ Envoi en cours...';
 
-    emailjs.send("service_minipelle", "template_znkv35b", {
-      from_name:  prenom + ' ' + nom,
-      from_email: email,
-      phone:      tel,
-      sujet:      'Demande de devis — ' + getMachineLabel(),
+    const SUPABASE_URL = 'https://satkuswraclwyyeqympo.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_oARJds7_TlQabr57tEOtKA_q5GNio_T';
+
+    fetch(`${SUPABASE_URL}/rest/v1/reservations`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        prenom, nom, email, tel,
+        adresse: adresse || null,
+        machine: getMachineLabel(),
+        duree: getDureeLabel(),
+        accessoires: accs,
+        livraison: livraisonLabel,
+        total_estime: totalStr,
+        date_souhaitee: dateStr,
+        message: msg || null,
+        statut: 'nouveau'
+      })
+    }).catch(err => console.error('Erreur Supabase insert:', err));
+
+    emailjs.send("service_minipelle", "template_brnmm8m", {
+      name:    prenom + ' ' + nom,
+      email:   email,
+      phone:   tel,
+      subject: 'Demande de devis — ' + getMachineLabel(),
       message:
         'Machine : ' + getMachineLabel() + '\n' +
         'Durée : ' + getDureeLabel() + '\n' +
@@ -493,29 +527,7 @@
 
 
 <!-- Bouton WhatsApp flottant -->
-<a href="https://wa.me/33699168777?text=Bonjour%2C%20je%20souhaite%20un%20renseignement%20sur%20la%20location%20de%20mini%20pelle." 
-   target="_blank"
-   style="
-     position:fixed;
-     bottom:80px;
-     right:20px;
-     z-index:9998;
-     background:#25D366;
-     color:#fff;
-     width:56px;
-     height:56px;
-     border-radius:50%;
-     display:flex;
-     align-items:center;
-     justify-content:center;
-     font-size:1.6rem;
-     box-shadow:0 4px 15px rgba(0,0,0,0.25);
-     text-decoration:none;
-     transition:transform .2s;
-   "
-   onmouseover="this.style.transform='scale(1.1)'"
-   onmouseout="this.style.transform='scale(1)'"
-   title="Nous contacter sur WhatsApp">💬</a>
+
 
 
 <script>
@@ -534,5 +546,11 @@
   });
 </script>
 
+
+  <!-- chatbot-mpd -->
+  <script src="/chatbot-mpd.js"></script>
+
+  <!-- exit-popup -->
+  <script src="/exit-popup.js"></script>
 </body>
 </html>
