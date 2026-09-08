@@ -449,6 +449,16 @@
     const nom     = document.getElementById('nom').value.trim();
     const email   = document.getElementById('email').value.trim();
     const tel     = document.getElementById('tel').value.trim();
+
+    if (!tel || !email) {
+      alert("Merci de renseigner votre téléphone et votre email.");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Merci de renseigner une adresse email valide.");
+      return;
+    }
     const adresse = document.getElementById('adresse').value.trim();
     const msg     = document.getElementById('message').value.trim();
     const formMsg = document.getElementById('formMsg');
