@@ -495,13 +495,15 @@
         adresse: adresse || null,
         machine: getMachineLabel(),
         duree: getDureeLabel(),
-        accessoires: accs,
+        options: accs,
         livraison: livraisonLabel,
-        total_estime: totalStr,
         date_souhaitee: dateStr,
-        message: msg || null,
-        statut: 'nouveau'
+        message: msg || null
       })
+    }).then(res => {
+      if (!res.ok) {
+        res.text().then(t => console.error('Erreur Supabase insert:', res.status, t));
+      }
     }).catch(err => console.error('Erreur Supabase insert:', err));
 
     emailjs.send("service_minipelle", "template_brnmm8m", {
