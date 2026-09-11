@@ -141,7 +141,7 @@
 
   <div class="faq-item">
     <button class="faq-question" onclick="toggle(this)">Quel est le coût de la livraison ? <span class="faq-arrow">▼</span></button>
-    <div class="faq-answer">La livraison de la KPC KT562 est à 69€ (aller-retour). La livraison de la Kubota D902 1T5 est à 89€ (aller-retour). Ces tarifs couvrent la livraison et la récupération de la machine sur votre site.</div>
+    <div class="faq-answer">La livraison de la KPC KT562 est à 90€ (aller-retour). La livraison de la Kubota D902 1T5 est à 89€ (aller-retour). Ces tarifs couvrent la livraison et la récupération de la machine sur votre site.</div>
   </div>
 
   <div class="faq-item">
@@ -184,6 +184,13 @@
 
 </div>
 
+
+<!-- Badge entreprise vérifiée -->
+<div style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #e0e0e0;border-radius:8px;padding:8px 14px;font-family:Arial,sans-serif;font-size:13px;color:#333;margin:10px auto;max-width:fit-content;">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#4CAF50"/><path d="M7 12.5l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <span><strong style="color:#111">Entreprise vérifiée</strong> &mdash; SIRET 52224467200039</span>
+</div>
+<!-- Fin badge -->
 <footer>
   <div class="footer-links">
     <a href="/catalogue.html">Catalogue</a>
@@ -249,29 +256,7 @@
 
 
 <!-- Bouton WhatsApp flottant -->
-<a href="https://wa.me/33699168777?text=Bonjour%2C%20je%20souhaite%20un%20renseignement%20sur%20la%20location%20de%20mini%20pelle." 
-   target="_blank"
-   style="
-     position:fixed;
-     bottom:80px;
-     right:20px;
-     z-index:9998;
-     background:#25D366;
-     color:#fff;
-     width:56px;
-     height:56px;
-     border-radius:50%;
-     display:flex;
-     align-items:center;
-     justify-content:center;
-     font-size:1.6rem;
-     box-shadow:0 4px 15px rgba(0,0,0,0.25);
-     text-decoration:none;
-     transition:transform .2s;
-   "
-   onmouseover="this.style.transform='scale(1.1)'"
-   onmouseout="this.style.transform='scale(1)'"
-   title="Nous contacter sur WhatsApp">💬</a>
+
 
 
 <script>
@@ -290,5 +275,11 @@
   });
 </script>
 
+
+  <!-- chatbot-mpd -->
+  <script src="/chatbot-mpd.js"></script>
+
+  <!-- exit-popup -->
+  <script src="/exit-popup.js"></script>
 </body>
 </html>
