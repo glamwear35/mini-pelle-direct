@@ -1,0 +1,9 @@
+.vercel
+.env*
+.DS_Store
+mini-pelle-site/
+index (1).html
+index_local_backup.html
+index.html.backup-*
+*.save
+rapport_audit*.txt
